@@ -1,2 +1,3 @@
 etc/
 createDB.ipynb
+__pycache__/
