@@ -22,6 +22,13 @@ class my_info:
                 my_ge.filed[self.my_lecture.iat[i,1]] += int(self.my_lecture.iat[i,7])
                 my_ge.specific_filed[self.my_lecture.iat[i,1]][self.my_lecture.iat[i,2]] += int(self.my_lecture.iat[i,7])
         return my_ge
+    def leanred_lec(self):
+        for key, value in self.my_GE.filed.items():
+            print(key,": (",value,"/",self.min_GE.filed[key],")")
+            if(key in self.my_GE.specific_filed.keys()):
+                for key2, value2 in self.my_GE.specific_filed[key].items():
+                    print('\t',key2,": (",value2,"/",self.min_GE.specific_filed[key][key2], ")")
+                
     
 class min_GE_score: 
     def __init__(self, year=2019):
@@ -39,7 +46,7 @@ class min_GE_score:
                                 "일반교양":{"인간과문화":3, "사회와역사":3, "자연과과학":3},\
                                 "확대교양":{"미래융복합":0,"국제화":0,"진로와취업":0,"예술과체육":0}}
             self.req_essential_code = {"전공필수": ['5110001',	'5110122',	'5110123',	'5110005',	'5110121',	'5110014',	'5110032',	'5110126',	'5110011',	'5110016',	'5110018',	'5110130',	'5110131',	'5110133',	'5110135']}
-
+    
 class lec_filed:
     def __init__(self):
         self.filed = {"개신기초교양":0, "일반교양":0, "확대교양":0, "자연이공계기초과학":0, "전공필수":0, "전공선택":0}
