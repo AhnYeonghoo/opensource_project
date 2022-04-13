@@ -1,3 +1,6 @@
+import pandas as pd
+
+
 file = pd.read_csv("./교육과정/1학기_전공.csv", encoding='utf-8' ,dtype=str)
 file = file.filter(['학년','과목구분', '과목코드', '과목명', '학점', '학점부여' ])
 pd_file = pd.DataFrame(file).dropna()
