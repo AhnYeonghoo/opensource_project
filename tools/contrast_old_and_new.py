@@ -1,4 +1,3 @@
-# 신구대조를 위한 db 파일입니다.
 
 class Old_and_new:
    list_ = [
@@ -66,17 +65,20 @@ class Old_and_new:
        new_lecture = []
           
        for i in range(len(self.list_) - 1):
-           new_lecture.append([x for x in self.list_[i] if self.list_[i][0] == ''])
+           if len(self.list_[i]) != 0 and self.list_[i][0] == '':
+               new_lecture.append([x for x in self.list_[i]])
     
        return new_lecture
    
+
    # 삭제 과목만 뱉기
    def get_old_lecture(self):
        old_lecture = []
-       
+
        for i in range(len(self.list_) - 1):
-           old_lecture.append([x for x in self.list_[i] if self.list_[i][2] == ''])
-   
+           if len(self.list_[i]) != 0 and self.list_[i][2]=='':
+               old_lecture.append([x for x in self.list_[i]])
+        
        return old_lecture
    
    # 모든 과목 뱉기
@@ -88,7 +90,8 @@ class Old_and_new:
        revision_lecture = []
        
        for i in range(len(self.list_) - 1):
-           revision_lecture.append([x for x in self.list_[i] if not self.list_[i][0] == '' and not self.list_[i][2] == ''])
+           if len(self.list_[i]) != 0 and not self.list_[i][0] == '' and not self.list_[i][2] == '':
+               revision_lecture.append([x for x in self.list_[i]])
            
        return revision_lecture
    
@@ -96,7 +99,10 @@ class Old_and_new:
 a = Old_and_new()
 
 
-# print(a.get_new_lecture())
-# print(a.get_all_lecture())
-# print(a.get_old_lecture())
-print(a.get_revision_lecture())
+# print(f'신설과목: {a.get_new_lecture()}')
+# print()
+# print(f'전체과목: {a.get_all_lecture()}')
+# print()
+# print(f'삭제된 과목: {a.get_old_lecture()}')
+# print()
+# print(f'개정된 과목: {a.get_revision_lecture()}')
