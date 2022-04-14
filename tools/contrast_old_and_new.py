@@ -72,12 +72,12 @@ class Old_and_new:
    
    # 삭제 과목만 뱉기
    def get_old_lecture(self):
-       old_lecture = []
-       
-       for i in range(len(self.list_) - 1):
-           old_lecture.append([x for x in self.list_[i] if self.list_[i][2] == ''])
-   
-       return old_lecture
+    old_lecture = []
+    for i in range(len(self.list_) - 1):
+        if self.list_[i][2] == '':
+            old_lecture.append([x for x in self.list_[i]])
+
+    return old_lecture
    
    # 모든 과목 뱉기
    def get_all_lecture(self):
@@ -88,7 +88,8 @@ class Old_and_new:
        revision_lecture = []
        
        for i in range(len(self.list_) - 1):
-           revision_lecture.append([x for x in self.list_[i] if not self.list_[i][0] == '' and not self.list_[i][2] == ''])
+            if not self.list_[i][0] == '' and not self.list_[i][2] == '':
+                revision_lecture.append([x for x in self.list_[i]])
            
        return revision_lecture
    

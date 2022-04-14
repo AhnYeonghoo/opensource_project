@@ -1,7 +1,10 @@
 from numpy import minimum
 import pandas as pd
 import os
+
+from pyparsing import nestedExpr
 from load_my_lecture import learned_list
+from tools import contrast_old_and_new as con
 
 class my_info:
     def __init__(self, year=2019, file_name = "learned.xlsx"):
@@ -22,12 +25,46 @@ class my_info:
                 my_ge.filed[self.my_lecture.iat[i,1]] += int(self.my_lecture.iat[i,7])
                 my_ge.specific_filed[self.my_lecture.iat[i,1]][self.my_lecture.iat[i,2]] += int(self.my_lecture.iat[i,7])
         return my_ge
+
+    def need_lec(self):
+            onn_lecs = con.Old_and_new().get_all_lecture()
+            all_lec = pd.read_excel("./source/all_lecture.xlsx",dtype=str)
+            req_major = self.min_GE.req_essential_code["전공필수"]
+            my_major = self.my_lecture[self.my_lecture["영역"].isin(["전공"])]
+            
+            for lec_code in req_major:
+                flag = False
+                for onn_lec in onn_lecs:
+                    if(lec_code == onn_lec[0]):
+                        flag = True
+                        print("\t", end="")
+                        if(onn_lec[0] in my_major['과목코드'].tolist()):
+                            print("(수강함)", onn_lec[1])
+                        elif(onn_lec[4] == "동일"):
+                            print(onn_lec[1], "->", onn_lec[3], " 변경되었습니다.")
+                        elif(onn_lec[4] == "삭제"):
+                            print(onn_lec[1], "는 폐강되었습니다")
+                        else:
+                            print(onn_lec[1], "는 신설되었습니다")
+                if(flag == False):
+                    print("\t",end="")
+                    if(lec_code in my_major["과목코드"].tolist()):
+                        print("(수강함)",end="")
+                    idx = all_lec['과목코드'].tolist().index(lec_code)
+                    print(all_lec['과목명'].tolist()[idx])
+                    
+
     def leanred_lec(self):
-        for key, value in self.my_GE.filed.items():
-            print(key,": (",value,"/",self.min_GE.filed[key],")")
-            if(key in self.my_GE.specific_filed.keys()):
-                for key2, value2 in self.my_GE.specific_filed[key].items():
-                    print('\t',key2,": (",value2,"/",self.min_GE.specific_filed[key][key2], ")")
+        for filed, fscore in self.my_GE.filed.items():
+            print(filed,": (",fscore,"/",self.min_GE.filed[filed],")")
+            if(filed in self.my_GE.specific_filed.keys()): #영역의 키값에 교양이 포함된 경우
+                for spe_filed, spscore in self.my_GE.specific_filed[filed].items():
+                     print('\t',spe_filed,": (",spscore,"/",self.min_GE.specific_filed[filed][spe_filed], ")")
+            elif(filed == "전공필수"):
+                self.need_lec()
+
+    
+
                 
     
 class min_GE_score: 
