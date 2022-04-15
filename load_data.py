@@ -34,24 +34,23 @@ class my_info:
             
             for lec_code in req_major:
                 flag = False
+                idx = all_lec['과목코드'].tolist().index(lec_code)
+                print("\t",all_lec['학점'].iloc[idx],end="")
+
+                if(lec_code in my_major["과목코드"].tolist()):
+                    print("(수강함)",end="")
+                    flag = True
+                
+                print(all_lec['과목명'].iloc[idx], end="")
+
                 for onn_lec in onn_lecs:
-                    if(lec_code == onn_lec[0]):
-                        flag = True
-                        print("\t", end="")
-                        if(onn_lec[0] in my_major['과목코드'].tolist()):
-                            print("(수강함)", onn_lec[1])
-                        elif(onn_lec[4] == "동일"):
-                            print(onn_lec[1], "->", onn_lec[3], " 변경되었습니다.")
+                    if(lec_code == onn_lec[0] and flag == False):
+                        if(onn_lec[4] == "동일"):
+                            print("->", onn_lec[3], " 변경되었습니다.",end="")
                         elif(onn_lec[4] == "삭제"):
-                            print(onn_lec[1], "는 폐강되었습니다")
-                        else:
-                            print(onn_lec[1], "는 신설되었습니다")
-                if(flag == False):
-                    print("\t",end="")
-                    if(lec_code in my_major["과목코드"].tolist()):
-                        print("(수강함)",end="")
-                    idx = all_lec['과목코드'].tolist().index(lec_code)
-                    print(all_lec['과목명'].tolist()[idx])
+                            print("는 폐강되었습니다",end="")
+                print()
+
                     
 
     def leanred_lec(self):
