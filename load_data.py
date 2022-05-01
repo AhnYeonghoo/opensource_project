@@ -6,9 +6,11 @@ import os
 from pyparsing import nestedExpr
 from load_my_lecture import get_my_lecture
 from tools import contrast_old_and_new as con
+from tools import Prerequisites_dictionary as pre
 
 all_ON_lecture = con.Old_and_new().get_all_lecture()
 all_lecture = pd.read_excel("./source/all_lecture.xlsx",dtype=str)
+prerequisites = pre.prerequisites().subject_pair_dic
 class my_info:
     def __init__(self, year=2019, file_name = "learned.xlsx"):
         self.year = year
@@ -21,18 +23,22 @@ class my_info:
         if(specific_field != ''):
             self.my_ge.specific_field[field][specific_field] += int(score)
 
+    def get_cource_info(self, i):
+        field = self.my_lecture.iat[i,1]
+        score = self.my_lecture.iat[i,7]
+        specific_field = ''
+        if("전공" == field):
+            field = self.my_lecture.iat[i,8]
+        elif("자연이공계기초과학"!=field):
+            specific_field = self.my_lecture.iat[i,2]
+        return score, field, specific_field
+
     def get_my_score(self):
         self.my_ge = lec_field()
         #8 : 이수구분 1:영역 2:세부영역 5:과목코드 7:학점
         for i in range(len(self.my_lecture)):
-            field = self.my_lecture.iat[i,1]
-            score = self.my_lecture.iat[i,7]
-            specific_field = ''
-            if("전공" == field):
-                field = self.my_lecture.iat[i,8]
-            elif("자연이공계기초과학"!=field):
-                specific_field = self.my_lecture.iat[i,2]
-            self.add_score(score,field,specific_field)
+            info =self.get_cource_info(i)
+            self.add_score(info[0], info[1], info[2])
         return self.my_ge
 
     def print_need_lec(self):
@@ -42,8 +48,12 @@ class my_info:
             for lec_code in require_major_codes:
                 flag = False
                 idx = all_lecture['과목코드'].tolist().index(lec_code)
+                if(lec_code in prerequisites.keys()):
+                    idx2 = all_lecture['과목코드'].tolist().index(prerequisites[lec_code])
+                    print("   ", all_lecture['과목명'].iloc[idx2]," (필요)",end="")
+                
                 print("\t",all_lecture['학점'].iloc[idx],end="")
-
+                
                 if(lec_code in my_major["과목코드"].tolist()):
                     print("(수강함)",end="")
                     flag = True
@@ -51,11 +61,14 @@ class my_info:
                 print(all_lecture['과목명'].iloc[idx], end="")
 
                 for onn_lec in all_ON_lecture:
-                    if(lec_code == onn_lec[0] and flag == False):
-                        if(onn_lec[4] == "동일"):
-                            print("->", onn_lec[3], " 변경되었습니다.",end="")
-                        elif(onn_lec[4] == "삭제"):
-                            print("는 폐강되었습니다",end="")
+                    if(flag == False):
+                        if(lec_code == onn_lec[0]):
+                            if(onn_lec[4] == "동일"):
+                                print("->", onn_lec[3], "(변경)",end="")
+                            elif(onn_lec[4] == "삭제"):
+                                print("(폐강)",end="")
+                            
+                
                 print()
 
     def is_specific(self, field):
@@ -65,6 +78,7 @@ class my_info:
         for field, require_score in self.my_ge.field.items():
             my_score = self.min_GE.field[field]
             print(f"{field} : ( {require_score} / {my_score})")
+
             if(self.is_specific(field)): #세부영역이 필요한 경우
                 for specific_field, require_score in self.my_ge.specific_field[field].items():
                     my_score = self.min_GE.specific_field[field][specific_field]
