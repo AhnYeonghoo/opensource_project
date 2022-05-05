@@ -6,5 +6,5 @@ app_name = "search"
 
 urlpatterns = [
     path("index/", views.index, name="index"),
-    
+    path("index/", views.print_list, name="print_list"),
 ]
