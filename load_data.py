@@ -72,7 +72,13 @@ class my_info:
                 print()
 
     def is_specific(self, field):
+        """
+        :return type = bool 
+        """
         return field in self.my_ge.specific_field.keys()
+
+    def print_major_selection(self):
+        self.my_lecture
 
     def print_my_lec(self):
         for field, require_score in self.my_ge.field.items():
