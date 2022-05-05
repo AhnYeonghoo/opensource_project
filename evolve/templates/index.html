@@ -1,68 +1,18 @@
-{% load static %}
-<!doctype html>
-<html lang="ko">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
-    <!-- pybo CSS -->
-    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-    <script src="{% static 'index.js' %}"></script>
-    <title>
-        {% block title %}에볼루션~~{% endblock title %}
-    </title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 
 <body>
-
-    {% block header %}
-    <main>
-        <header class="p-3 bg-dark text-white">
-            <div class="container">
-
-                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                    <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
-                            <use xlink:href="#bootstrap" />
-                        </svg>
-                    </a>
-
-                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li>
-                            <a href="#" class="nav-link px-2 text-secondary">Home</a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-link px-2 text-white">temp</a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-link px-2 text-white">temp</a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-link px-2 text-white">temp</a>
-                        </li>
-                    </ul>
-                    <form class="form-inline col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" method="POST" action="#"
-                        style="float:left; width:300px;">
-
-                        <input class="form-control me-2" type="search" placeholder="temp." aria-label="Search"
-                            name="user_input" id="user_input">
-                    </form>
-                    <a class="nav-link" href="#">
-                        <div class="text-end">
-                            <button type="button" class="btn btn-outline-light me-2"
-                                onclick="location.href = '#'">Login</button>
-                        </div>
-
-                </div>
-            </div>
-        </header>
-    </main>
-    {% endblock %}
-    <!-- 기본 템플릿 안에 삽입될 내용 Start -->
-    {% block content %}{% endblock %}
+    <form>
+        <input type="file" accept=".csv" placeholder="엑셀 파일을 넣어주세요." />
+        <input type="submit" placeholder="제출" />
+        <form />
 </body>
 
 </html>
