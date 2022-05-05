@@ -1,10 +1,11 @@
 import pandas as pd
 import os
 
-def learned_list(file_name="learned.xlsx", type="all"):
+def get_my_lecture(file_name="learned.xlsx", type="all"):
     """
     들었던 강의 리스트
     type=(str) (default)all : Dataframe , list : List of Lecture Code
+    return = dataframe
     """
     file_name = "./source/" + file_name
     if(os.path.isfile(file_name) == False):
