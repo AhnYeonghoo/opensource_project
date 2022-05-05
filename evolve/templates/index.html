@@ -10,7 +10,12 @@
 </head>
 
 <body>
-    <a href="{% url 'search:upload_file' %}">파일 업로드하러 가기</a>
+    <form action="{% url 'search:upload_file' %}" method="POST" enctype="multipart/form-data">
+        <input type="text" name="title" placeholder="Enter a title">
+        <input type="file" name="uploaded_file">
+        {% csrf_token %}
+        <input type="submit" value="Upload">
+    </form>
 
     {% for i in gaesin %}
     <tr>

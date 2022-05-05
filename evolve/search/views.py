@@ -15,16 +15,31 @@ def index(req):
 def upload_file(req):
     
     if req.method == "POST":
-        title = req.POST['title']
+        title = req.POST.get('title')
         uploaded_file = req.FILES['uploaded_file']
         
         document = models.Document(
             title = title,
-            upload_file = upload_file
+            uploaded_file = uploaded_file
         )
         document.save()
         documents = models.Document.objects.all()
         
-        return render(req, "search/pload-file.html", context={
+        return render(req, "upload-file.html", context={
             "files" : documents
         })
+    else:
+        title = req.POST.get('title')
+        uploaded_file = req.FILES['uploaded_file']
+        
+        document = models.Document(
+            title = title,
+            uploaded_file = uploaded_file
+        )
+        document.save()
+        documents = models.Document.objects.all()
+        
+        return render(req, "upload-file.html", context={
+            "files" : documents
+        })
+        
