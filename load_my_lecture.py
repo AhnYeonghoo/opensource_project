@@ -13,9 +13,18 @@ def get_my_lecture(file_name="learned.xlsx", type="all"):
     else:
         df =  pd.read_excel(file_name,usecols=[i for i in range(0,9)],dtype=str)
         df.columns = ["구분", "영역", "세부영역", "수강년도", "학기", "과목코드", "과목명", "학점", "이수구분"]
+<<<<<<< HEAD
         
-        df = df.sort_values(["과목코드"]).dropna().reset_index(drop=True)
+=======
+>>>>>>> de1715f8ecc59fac8b6cc0850f052b37311d580c
+        df = df.sort_values(["과목코드"]).dropna(subset="과목코드").reset_index(drop=True)
         if(type == "all"):
             return df
         else:
             return df["과목코드"].tolist()
+<<<<<<< HEAD
+=======
+
+l = get_my_lecture()
+print(l)
+>>>>>>> de1715f8ecc59fac8b6cc0850f052b37311d580c

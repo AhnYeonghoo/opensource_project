@@ -9,6 +9,7 @@ from tools import Prerequisites_dictionary as pre
 
 all_ON_lecture = con.Old_and_new().get_all_lecture()
 all_lecture = pd.read_excel("./source/all_lecture.xlsx",dtype=str)
+lecture_in_2022 = pd.read_excel("./source/2022lecture.xlsx")
 prerequisites = pre.prerequisites().subject_pair_dic
 class my_info:
     def __init__(self, year=2019, file_name = "learned.xlsx"):
