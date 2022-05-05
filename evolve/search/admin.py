@@ -6,6 +6,7 @@ from . import models
 
 admin.site.register(models.Lecture)
 admin.site.register(models.GaesinBasicCulture)
+admin.site.register(models.Document)
 
 
 

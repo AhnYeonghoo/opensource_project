@@ -54,4 +54,10 @@ file = file.filter(['학년','과목구분', '과목코드', '과목명', '학�
 pd_file = pd.DataFrame(file).dropna()
 
 
-
+class Document(models.Model):
+    #..
+    title = models.CharField(max_length=200)
+    uploaded_file = models.FileField(upload_to="result/")
+    date_time_of_upload = models.DateTimeField(auto_now=True)
+    
+    

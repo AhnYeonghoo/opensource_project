@@ -10,13 +10,17 @@
 </head>
 
 <body>
-    <form>
-        <input type="file" accept=".csv" placeholder="엑셀 파일을 넣어주세요." />
-        <input type="submit" placeholder="제출" />
-        <form />
-        {% for i in title%}
-        i
-        {% endfor %}
+    <a href="{% url 'search:upload_file' %}">파일 업로드하러 가기</a>
+
+    {% for i in gaesin %}
+    <tr>
+        <td>과목명: {{i.과목명}}</td>
+        <td>과목구분: {{i.과목구분}}</td>
+        <td>과목코드: {{i.과목코드}}</td>
+        <td>학점시수: {{i.학점}}</td>
+        <br>
+    </tr>
+    {% endfor %}
 </body>
 
 </html>
