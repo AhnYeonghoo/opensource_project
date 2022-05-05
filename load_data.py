@@ -3,7 +3,6 @@ from numpy import minimum
 import pandas as pd
 import os
 
-from pyparsing import nestedExpr
 from load_my_lecture import get_my_lecture
 from tools import contrast_old_and_new as con
 from tools import Prerequisites_dictionary as pre
@@ -91,6 +90,14 @@ class my_info:
                     print(f"\t {specific_field} : ( {require_score} / {my_score})")
             elif(field == "전공필수"):
                 self.print_need_lec()
+
+    def print_my_ge_lec(self, specific_field):
+        df = pd.read_excel("./source/2022lecture.xlsx", dtype = str)
+        my_ge_lec = pd.DataFrame(df, columns = ['분야', '교과목명'])
+        my_ge_lec_list = my_ge_lec.values.tolist()
+        for i in range(len(my_ge_lec_list)):
+            if(my_ge_lec_list[i][0] == specific_field):
+                print(my_ge_lec_list[i][1])
 
 class lec_field:
     def __init__(self):
