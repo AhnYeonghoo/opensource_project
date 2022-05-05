@@ -14,7 +14,6 @@ class FirstSemesterMajor(models.Model):
     
     # 1학기 전공에 대한 정보
     
-    학년 = models.CharField("학년", max_length=150)
     # 학년 = pd_file['학년'].to_string()
     과목구분 = models.CharField("과목구분", max_length=150)
     # 과목구분 = pd_file['과목구분']
@@ -24,7 +23,7 @@ class FirstSemesterMajor(models.Model):
     # 과목명 = pd_file['과목명']
     학점 = models.CharField("학점", max_length=150)
     # 학점 = pd_file['학점']
-    학점부여 = models.CharField("학점부여", max_length=150)
+    
     # 학점부여 = pd_file['학점부여']
     
     def get_info(self):
@@ -39,7 +38,6 @@ class SecondSemesterMajor(models.Model):
     
     # 2학기 전공
     
-    학년 = models.CharField("학년", max_length=150)
     # 학년 = pd_file['학년'].to_string()
     과목구분 = models.CharField("과목구분", max_length=150)
     # 과목구분 = pd_file['과목구분']
@@ -49,7 +47,6 @@ class SecondSemesterMajor(models.Model):
     # 과목명 = pd_file['과목명']
     학점 = models.CharField("학점", max_length=150)
     # 학점 = pd_file['학점']
-    학점부여 = models.CharField("학점부여", max_length=150)
     # 학점부여 = pd_file['학점부여']
     
     def get_info(self):
@@ -65,7 +62,7 @@ class FirstSemesterSWMajor(models.Model):
     
     # 1학기 소웨 전공
     
-    학년 = models.CharField("학년", max_length=150)
+ 
     # 학년 = pd_file['학년'].to_string()
     과목구분 = models.CharField("과목구분", max_length=150)
     # 과목구분 = pd_file['과목구분']
@@ -75,7 +72,6 @@ class FirstSemesterSWMajor(models.Model):
     # 과목명 = pd_file['과목명']
     학점 = models.CharField("학점", max_length=150)
     # 학점 = pd_file['학점']
-    학점부여 = models.CharField("학점부여", max_length=150)
     # 학점부여 = pd_file['학점부여']
     
     def get_info(self):
@@ -91,7 +87,6 @@ class SecondSemesterSWMajor(models.Model):
  
     # 2학기 소웨 전공
     
-    학년 = models.CharField("학년", max_length=150)
     # 학년 = pd_file['학년'].to_string()
     과목구분 = models.CharField("과목구분", max_length=150)
     # 과목구분 = pd_file['과목구분']
@@ -101,7 +96,7 @@ class SecondSemesterSWMajor(models.Model):
     # 과목명 = pd_file['과목명']
     학점 = models.CharField("학점", max_length=150)
     # 학점 = pd_file['학점']
-    학점부여 = models.CharField("학점부여", max_length=150)
+
     # 학점부여 = pd_file['학점부여']
     
     def get_info(self):
@@ -119,7 +114,6 @@ class FirstNaturalScience(models.Model):
     
     # 1학기 자연이공계기초
     
-    학년 = models.CharField("학년", max_length=150)
     # 학년 = pd_file['학년'].to_string()
     과목구분 = models.CharField("과목구분", max_length=150)
     # 과목구분 = pd_file['과목구분']
@@ -129,7 +123,7 @@ class FirstNaturalScience(models.Model):
     # 과목명 = pd_file['과목명']
     학점 = models.CharField("학점", max_length=150)
     # 학점 = pd_file['학점']
-    학점부여 = models.CharField("학점부여", max_length=150)
+
     # 학점부여 = pd_file['학점부여']
     def get_info(self):
         return pd_file.values.tolist()
@@ -145,7 +139,6 @@ class SecondNaturalScience(models.Model):
     
     # 2학기 자연이공계기초
     
-    학년 = models.CharField("학년", max_length=150)
     # 학년 = pd_file['학년'].to_string()
     과목구분 = models.CharField("과목구분", max_length=150)
     # 과목구분 = pd_file['과목구분']
@@ -155,7 +148,7 @@ class SecondNaturalScience(models.Model):
     # 과목명 = pd_file['과목명']
     학점 = models.CharField("학점", max_length=150)
     # 학점 = pd_file['학점']
-    학점부여 = models.CharField("학점부여", max_length=150)
+
     # 학점부여 = pd_file['학점부여']
     
     def get_info(self):
@@ -173,7 +166,6 @@ class Ocu(models.Model):
     
     # 1학기,2학기 OCU
     
-    학년 = models.CharField("학년", max_length=150)
     # 학년 = pd_file['학년'].to_string()
     과목구분 = models.CharField("과목구분", max_length=150)
     # 과목구분 = pd_file['과목구분']
@@ -183,7 +175,6 @@ class Ocu(models.Model):
     # 과목명 = pd_file['과목명']
     학점 = models.CharField("학점", max_length=150)
     # 학점 = pd_file['학점']
-    학점부여 = models.CharField("학점부여", max_length=150)
     # 학점부여 = pd_file['학점부여']
     
     def get_info(self):
@@ -200,8 +191,7 @@ pd_file = pd.DataFrame(file).dropna()
 class FirstGaesinBasicCulture(models.Model):
     
     # 1학기 개신기초교양
-    
-    학년 = models.CharField("학년", max_length=150)
+
     # 학년 = pd_file['학년'].to_string()
     과목구분 = models.CharField("과목구분", max_length=150)
     # 과목구분 = pd_file['과목구분']
@@ -211,7 +201,6 @@ class FirstGaesinBasicCulture(models.Model):
     # 과목명 = pd_file['과목명']
     학점 = models.CharField("학점", max_length=150)
     # 학점 = pd_file['학점']
-    학점부여 = models.CharField("학점부여", max_length=150)
     # 학점부여 = pd_file['학점부여']
     
     def get_info(self):
@@ -227,7 +216,6 @@ class SecondGaesinBasicCulture(models.Model):
     
     # 2학기 개신기초교양
     
-    학년 = models.CharField("학년", max_length=150)
     # 학년 = pd_file['학년'].to_string()
     과목구분 = models.CharField("과목구분", max_length=150)
     # 과목구분 = pd_file['과목구분']
@@ -237,7 +225,6 @@ class SecondGaesinBasicCulture(models.Model):
     # 과목명 = pd_file['과목명']
     학점 = models.CharField("학점", max_length=150)
     # 학점 = pd_file['학점']
-    학점부여 = models.CharField("학점부여", max_length=150)
     # 학점부여 = pd_file['학점부여']
     
     def get_info(self):
@@ -255,7 +242,6 @@ class FirstBasicCulture(models.Model):
     
     # 1학기 일반교양
     
-    학년 = models.CharField("학년", max_length=150)
     # 학년 = pd_file['학년'].to_string()
     과목구분 = models.CharField("과목구분", max_length=150)
     # 과목구분 = pd_file['과목구분']
@@ -265,7 +251,6 @@ class FirstBasicCulture(models.Model):
     # 과목명 = pd_file['과목명']
     학점 = models.CharField("학점", max_length=150)
     # 학점 = pd_file['학점']
-    학점부여 = models.CharField("학점부여", max_length=150)
     # 학점부여 = pd_file['학점부여']
     
     def get_info(self):
@@ -283,7 +268,6 @@ class SecondBasicCulture(models.Model):
     
     # 2학기 일반교양
     
-    학년 = models.CharField("학년", max_length=150)
     # 학년 = pd_file['학년'].to_string()
     과목구분 = models.CharField("과목구분", max_length=150)
     # 과목구분 = pd_file['과목구분']
@@ -293,7 +277,6 @@ class SecondBasicCulture(models.Model):
     # 과목명 = pd_file['과목명']
     학점 = models.CharField("학점", max_length=150)
     # 학점 = pd_file['학점']
-    학점부여 = models.CharField("학점부여", max_length=150)
     # 학점부여 = pd_file['학점부여']
     
     def get_info(self):
