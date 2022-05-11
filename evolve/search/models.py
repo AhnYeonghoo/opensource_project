@@ -19,13 +19,9 @@ class GaesinBasicCulture(models.Model):
     # 학점 = pd_file['학점']
     # 학점부여 = pd_file['학점부여']
     
-    def get_info(self):
-        return pd_file.values.tolist()
+    # def get_info(self):
+    #     return pd_file.values.tolist()
 
-
-file = pd.read_csv("../etc/2학기_개신기초교양.csv", encoding='utf-8' ,dtype=str)
-file = file.filter(['학년','과목구분', '과목코드', '과목명', '학점', '학점부여' ])
-pd_file = pd.DataFrame(file).dropna()
 
 
 
@@ -44,14 +40,10 @@ class Lecture(models.Model):
     # 학점 = pd_file['학점']
     # 학점부여 = pd_file['학점부여']
     
-    def get_info(self):
-        return pd_file.values.tolist()
+    # def get_info(self):
+    #     return pd_file.values.tolist()
     
 
-
-file = pd.read_csv("../etc/2학기_일반교양.csv", encoding='utf-8' ,dtype=str)
-file = file.filter(['학년','과목구분', '과목코드', '과목명', '학점', '학점부여' ])
-pd_file = pd.DataFrame(file).dropna()
 
 
 class Document(models.Model):
