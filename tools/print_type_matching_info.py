@@ -2,7 +2,7 @@ import pandas as pd
 from os.path import join
 
 # 분야에 맞는 강의의 모든 정보 출력 함수 시작
-path_file = join('..', 'source','2022lecture.xlsx') # 상대경로로 만들기
+path_file = join('.', 'source','2022lecture.xlsx') # 상대경로로 만들기
 
 data=pd.read_excel(path_file)   # 엑셀 파일 읽기
 
@@ -18,7 +18,7 @@ def get_type_matching_info(subject_type):     # 분야에 맞는 강의의 모�
 # print(get_type_matching_info('정보 문해')) # 테스트
 
 # 과목코드에 따른 학점 불러오는 함수 시작
-path_file2 = join('..','source','all_lecture.xlsx') # 상대경로 조합
+path_file2 = join('.','source','all_lecture.xlsx') # 상대경로 조합
 
 data2=pd.read_excel(path_file2, dtype=str) 
 # 엑셀 파일 읽기, 과목코드가 0부터 시작하므로 문자열로 읽어야함
