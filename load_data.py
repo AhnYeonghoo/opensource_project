@@ -100,6 +100,26 @@ class my_info:
             if(my_ge_lec_list[i][0] == specific_field):
                 print(my_ge_lec_list[i][1])
 
+    def print_GE(self, specific_field):         # 세부영역 이수 여부 출력
+        df_learned= pd.read_excel("./source/learned_mc.xlsx", dtype = str)
+        my_learned= pd.DataFrame(df_learned, columns=['영역','세부영역','교과목번호','교과목명','이수구분'])
+        my_learned_list = my_learned.values.tolist()
+
+        df = pd.read_excel("./source/2022lecture.xlsx", dtype = str)
+        df_all = pd.DataFrame(df, columns = ['분야', '교과목번호', '교과목명'])
+        df_all_list = df_all.values.tolist()
+
+        for i in range(len(df_all_list)):
+            if df_all_list[i][0] == specific_field:
+                    flag=0
+                    for j in range(len(my_learned_list)):
+                            if df_all_list[i][1] == my_learned_list[j][2]:
+                                    flag=1
+                    if flag == 1:
+                            print("{} (이수)".format(df_all_list[i][2]))
+                    else:
+                            print("{} (미이수)".format(df_all_list[i][2]))
+
 class lec_field:
     def __init__(self):
         self.field = {"개신기초교양":0, "일반교양":0, "확대교양":0, "자연이공계기초과학":0, "전공필수":0, "전공선택":0}
