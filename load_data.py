@@ -100,8 +100,7 @@ class my_info:
         my_ge_lec_list = my_ge_lec.values.tolist()
         for i in range(len(my_ge_lec_list)):
             if(my_ge_lec_list[i][0] == specific_field):
-                #여백 '\t' 설정 필요합니다.
-                print(my_ge_lec_list[i][1])
+                print("\t{}".format(my_ge_lec_list[i][1]))
 
     def print_GE(self, specific_field):         # 세부영역 이수 여부 출력
         df_learned= pd.read_excel("./source/learned_mc.xlsx", dtype = str)
@@ -120,8 +119,6 @@ class my_info:
                                     flag=1
                     if flag == 1:
                             print("{} (이수)".format(df_all_list[i][2]))
-                    else:
-                            print("{} (미이수)".format(df_all_list[i][2])) #미이수 굳이 넣을 필요 없을 것 같습니다!!
 
 class lec_field:
     def __init__(self):
