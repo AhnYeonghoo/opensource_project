@@ -84,3 +84,14 @@ def recomand(req):
         return render(req, "app_list.html", context)
     
     
+def goto_recomand(req):
+    
+    return render(req, "recomand.html")
+
+def goto_upload_file(req):
+    
+    return render(req, "upload-file.html")
+
+def contact(req):
+    
+    return render(req, "contact.html")

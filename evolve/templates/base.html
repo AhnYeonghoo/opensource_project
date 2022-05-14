@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %} ">
+    <script src="{% static 'index.js' %}"></script>
+    <script src="{% static 'slideshow.js' %}"></script>
+    <title>{% block title %} CBNU {% endblock title %}</title>
+</head>
+
+
+<body>
+
+    {% block header %}
+    <main>
+        <header class="p-3 bg-dark text-white">
+            <div class="container">
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li>
+                        <a href="{% url  'search:index' %}" class="nav-link px-2 text-white">Home</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'search:goto_upload_file' %}" class="nav-link px-2 text-white">학점계산기</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'search:goto_recomand' %}" class="nav-link px-2 text-white">과목추천</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'search:contact' %}" class="nav-link px-2 text-white">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+
+
+    </main>
+    {% endblock %}
+    <!-- 기본 템플릿 안에 삽입될 내용 Start -->
+    {% block content %} {% endblock %}
+</body>
+
+</html>
