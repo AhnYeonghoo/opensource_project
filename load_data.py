@@ -89,6 +89,8 @@ class my_info:
                 for specific_field, require_score in self.my_ge.specific_field[field].items():
                     my_score = self.min_GE.specific_field[field][specific_field]
                     print(f"\t {specific_field} : ( {require_score} / {my_score})")
+                    if(require_score > my_score):
+                        self.print_my_ge_lec(specific_field)
             elif(field == "전공필수"):
                 self.print_need_lec()
 
@@ -98,6 +100,7 @@ class my_info:
         my_ge_lec_list = my_ge_lec.values.tolist()
         for i in range(len(my_ge_lec_list)):
             if(my_ge_lec_list[i][0] == specific_field):
+                print(sep="\t\t")
                 print(my_ge_lec_list[i][1])
 
     def print_GE(self, specific_field):         # 세부영역 이수 여부 출력
