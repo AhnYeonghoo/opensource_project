@@ -79,18 +79,26 @@ class my_info:
 
     def print_major_selection(self):
         self.my_lecture
+        if self.year < 20:
+            A=3
+        else:
+            self.print_my_ge_lec("전공선택")
 
     def print_my_lec(self):
-        for field, require_score in self.my_ge.field.items():
-            my_score = self.min_GE.field[field]
-            print(f"{field} : ( {require_score} / {my_score})")
+        for field, my_score in self.my_ge.field.items():
+            require_score = self.min_GE.field[field]
+            print(f"{field} : ( {my_score} / {require_score})")
 
             if(self.is_specific(field)): #세부영역이 필요한 경우
-                for specific_field, require_score in self.my_ge.specific_field[field].items():
-                    my_score = self.min_GE.specific_field[field][specific_field]
-                    print(f"\t {specific_field} : ( {require_score} / {my_score})")
+                for specific_field, my_score in self.my_ge.specific_field[field].items():
+                    require_score = self.min_GE.specific_field[field][specific_field]
+                    print(f"\t {specific_field} : ( {my_score} / {require_score})")
+                    if(my_score < require_score):
+                        self.print_GE(specific_field)
             elif(field == "전공필수"):
                 self.print_need_lec()
+            elif(field == "전공선택"):
+                self.print_major_selection()
 
     def print_my_ge_lec(self, specific_field):
         df = pd.read_excel("./source/2022lecture.xlsx", dtype = str)
@@ -98,7 +106,7 @@ class my_info:
         my_ge_lec_list = my_ge_lec.values.tolist()
         for i in range(len(my_ge_lec_list)):
             if(my_ge_lec_list[i][0] == specific_field):
-                print(my_ge_lec_list[i][1])
+                print("\t{}".format(my_ge_lec_list[i][1]))
 
     def print_GE(self, specific_field):         # 세부영역 이수 여부 출력
         df_learned= pd.read_excel("./source/learned_mc.xlsx", dtype = str)
@@ -117,8 +125,6 @@ class my_info:
                                     flag=1
                     if flag == 1:
                             print("{} (이수)".format(df_all_list[i][2]))
-                    else:
-                            print("{} (미이수)".format(df_all_list[i][2]))
 
 class lec_field:
     def __init__(self):
