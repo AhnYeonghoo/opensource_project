@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 style="color:blue">관심있는 분야를 선택하세요</h1>
+<br>
+
+<form action="{% url 'search:recomand' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="submit" value="게임" name="game">
+    <input type="submit" value="앱" name="app">
+    <input type="submit" value="네트워크" name="network">
+    <input type="submit" value="임베디드" name="embedded">
+    <input type="submit" value="인공지능" name="ai">
+</form>
+{% endblock %}
