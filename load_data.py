@@ -109,13 +109,8 @@ class my_info:
                 print("\t{}".format(my_ge_lec_list[i][1]))
 
     def print_GE(self, specific_field):         # 세부영역 이수 여부 출력
-        df_learned= pd.read_excel("./source/learned_mc.xlsx", dtype = str)
-        my_learned= pd.DataFrame(df_learned, columns=['영역','세부영역','교과목번호','교과목명','이수구분'])
-        my_learned_list = my_learned.values.tolist()
-
-        df = pd.read_excel("./source/2022lecture.xlsx", dtype = str)
-        df_all = pd.DataFrame(df, columns = ['분야', '교과목번호', '교과목명'])
-        df_all_list = df_all.values.tolist()
+        my_learned_list = pd.DataFrame(self.my_lecture, columns=['영역','세부영역','교과목번호','교과목명','이수구분']).values.tolist()
+        df_all_list = pd.DataFrame(lecture_in_2022, columns = ['분야', '교과목번호', '교과목명']).values.tolist()
 
         for i in range(len(df_all_list)):
             if df_all_list[i][0] == specific_field:
