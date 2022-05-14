@@ -1,0 +1,10 @@
+{% block content %}
+<h1> 인공지능에 대한 추천 과목 목록은 다음과 같습니다</h1>
+
+{% for i in ai %}
+
+과목명: {{i.lecture_name}}
+<br>
+{% endfor %}
+
+{% endblock %}
