@@ -9,24 +9,30 @@
     <title>Document</title>
 </head>
 
+
 <body>
+    <h1 style="color:blue"> 계산하고자 하는 학점이수목록 엑셀 파일을 업로드 해주세요. </h1>
     <form action="{% url 'search:upload_file' %}" method="POST" enctype="multipart/form-data">
-        <input type="text" name="title" placeholder="Enter a title">
+        <input type="text" name="title" placeholder="학번을 입력하세요.">
         <input type="file" name="uploaded_file">
         {% csrf_token %}
         <input type="submit" value="Upload">
     </form>
 
-    {% for i in gaesin %}
-    <tr>
-        <td>과목명: {{i.과목명}}</td>
-        <td>과목구분: {{i.과목구분}}</td>
-        <td>과목코드: {{i.과목코드}}</td>
-        <td>학점시수: {{i.학점}}</td>
-        <br>
-    </tr>
-    {% endfor %}
+
+
+    <br>
+    <br>
+    <h1 style="color:blue">관심있는 분야를 선택하세요</h1>
+    <form action="{% url 'search:recomand' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="submit" value="게임" name="game">
+        <input type="submit" value="앱" name="app">
+        <input type="submit" value="네트워크" name="network">
+        <input type="submit" value="임베디드" name="embedded">
+        <input type="submit" value="인공지능" name="ai">
+    </form>
+
 </body>
 
-</html>
-{% endblock %}
+</html> {% endblock %}
