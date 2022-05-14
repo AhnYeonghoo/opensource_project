@@ -78,8 +78,28 @@ class my_info:
         return field in self.my_ge.specific_field.keys()
 
     def print_major_selection(self):
-        if self.year < 20:
-            A=3
+        if self.year < 2020:
+            codes = self.my_lecture[self.my_lecture["이수구분"]=="전공선택"]["과목코드"].tolist()
+            changed_codes = codes.copy()
+            for lec in all_ON_lecture:
+                if lec[0] in codes:
+                    changed_codes[codes.index(lec[0])] = lec[2]
+
+            li = all_lecture.set_index("과목코드",drop=True)
+
+            #print(load_data.prerequisites.keys())
+
+            for lec1, lec2 in zip(codes, changed_codes):
+                if(lec1 != lec2):
+                    print("\t(이수)", li.loc[lec1, "과목명"], "->", li.loc[lec2, "과목명"], li.loc[lec2, "학점"])
+                else:
+                    print("\t(이수)", li.loc[lec1, "과목명"], li.loc[lec2, "학점"])
+
+
+            for lec in lecture_in_2022[lecture_in_2022["분야"]=="전공선택"].values.tolist():
+                if(lec in codes):
+                    continue
+                print("\t(미이수)", lec[4], lec[5])
         else:
             my_learned_code=self.my_lecture["과목코드"].tolist()
             df = pd.read_excel("./source/2022lecture.xlsx", dtype = str)
@@ -134,7 +154,9 @@ class my_info:
                             if df_all_list[i][1] == my_learned_list[j][2]:
                                     flag=1
                     if flag == 1:
-                            print("{} (이수)".format(df_all_list[i][2]))
+                            print("\t\t{} (이수)".format(df_all_list[i][2]))
+                    else:
+                            print("\t\t{} (미이수)".format(df_all_list[i][2]))
 
 class lec_field:
     def __init__(self):
