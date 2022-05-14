@@ -29,6 +29,7 @@ python manage.py runserver
 ```
 python 3.x
 Django 3.8
+이 외 requirements.txt 참고
 ```
 
 ## 실행 방법(예정)
