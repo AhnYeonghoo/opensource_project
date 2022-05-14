@@ -79,6 +79,10 @@ class my_info:
 
     def print_major_selection(self):
         self.my_lecture
+        if self.year < 20:
+            A=3
+        else:
+            self.print_my_ge_lec("전공선택")
 
     def print_my_lec(self):
         for field, my_score in self.my_ge.field.items():
@@ -93,6 +97,8 @@ class my_info:
                         self.print_GE(specific_field)
             elif(field == "전공필수"):
                 self.print_need_lec()
+            elif(field == "전공선택"):
+                self.print_major_selection()
 
     def print_my_ge_lec(self, specific_field):
         df = pd.read_excel("./source/2022lecture.xlsx", dtype = str)
