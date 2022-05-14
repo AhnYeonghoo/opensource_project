@@ -81,15 +81,15 @@ class my_info:
         self.my_lecture
 
     def print_my_lec(self):
-        for field, require_score in self.my_ge.field.items():
-            my_score = self.min_GE.field[field]
-            print(f"{field} : ( {require_score} / {my_score})")
+        for field, my_score in self.my_ge.field.items():
+            require_score = self.min_GE.field[field]
+            print(f"{field} : ( {my_score} / {require_score})")
 
             if(self.is_specific(field)): #세부영역이 필요한 경우
-                for specific_field, require_score in self.my_ge.specific_field[field].items():
-                    my_score = self.min_GE.specific_field[field][specific_field]
-                    print(f"\t {specific_field} : ( {require_score} / {my_score})")
-                    if(require_score > my_score):
+                for specific_field, my_score in self.my_ge.specific_field[field].items():
+                    require_score = self.min_GE.specific_field[field][specific_field]
+                    print(f"\t {specific_field} : ( {my_score} / {require_score})")
+                    if(my_score < require_score):
                         self.print_GE(specific_field)
             elif(field == "전공필수"):
                 self.print_need_lec()
