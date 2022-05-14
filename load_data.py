@@ -8,8 +8,8 @@ from tools import contrast_old_and_new as con
 from tools import Prerequisites_dictionary as pre
 
 all_ON_lecture = con.Old_and_new().get_all_lecture()
-all_lecture = pd.read_excel("./source/all_lecture.xlsx",dtype=str)
-lecture_in_2022 = pd.read_excel("./source/2022lecture.xlsx")
+all_lecture = pd.read_excel("./source/all_lecture.xlsx",dtype = str)
+lecture_in_2022 = pd.read_excel("./source/2022lecture.xlsx", dtype = str)
 prerequisites = pre.prerequisites().subject_pair_dic
 class my_info:
     def __init__(self, year=2019, file_name = "learned.xlsx"):
@@ -78,11 +78,26 @@ class my_info:
         return field in self.my_ge.specific_field.keys()
 
     def print_major_selection(self):
-        self.my_lecture
         if self.year < 20:
             A=3
         else:
-            self.print_my_ge_lec("전공선택")
+            my_learned_code=self.my_lecture["과목코드"].tolist()
+            df = pd.read_excel("./source/2022lecture.xlsx", dtype = str)
+            df_all = pd.DataFrame(df, columns = ['분야', '교과목번호', '교과목명', '학점'])
+            df_all_list = df_all.values.tolist()
+
+            for i in range(len(df_all_list)):
+                if df_all_list[i][0] == "전공선택":
+                    flag = 0
+                    for j in range(len(my_learned_code)):
+                        if df_all_list[i][1] == my_learned_code[j]:
+                            flag=1
+                    if flag == 1:
+                        print("\t(이수)   {} {}".format(df_all_list[i][2], df_all_list[i][3]))
+                        #print("\t{} (이수)".format(df_all_list[i][2]))
+                    else:
+                        print("\t(미이수) {} {}".format(df_all_list[i][2], df_all_list[i][3]))
+                        #print("\t{} (미이수)".format(df_all_list[i][2]))
 
     def print_my_lec(self):
         for field, my_score in self.my_ge.field.items():
