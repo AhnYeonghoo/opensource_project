@@ -8,8 +8,8 @@ from tools import contrast_old_and_new as con
 from tools import Prerequisites_dictionary as pre
 
 all_ON_lecture = con.Old_and_new().get_all_lecture()
-all_lecture = pd.read_excel("./source/all_lecture.xlsx",dtype=str)
-lecture_in_2022 = pd.read_excel("./source/2022lecture.xlsx")
+all_lecture = pd.read_excel("./source/all_lecture.xlsx",dtype = str)
+lecture_in_2022 = pd.read_excel("./source/2022lecture.xlsx", dtype = str)
 prerequisites = pre.prerequisites().subject_pair_dic
 class my_info:
     def __init__(self, year=2019, file_name = "learned.xlsx"):
@@ -78,19 +78,42 @@ class my_info:
         return field in self.my_ge.specific_field.keys()
 
     def print_major_selection(self):
-        self.my_lecture
+        if self.year < 20:
+            A=3
+        else:
+            my_learned_code=self.my_lecture["과목코드"].tolist()
+            df = pd.read_excel("./source/2022lecture.xlsx", dtype = str)
+            df_all = pd.DataFrame(df, columns = ['분야', '교과목번호', '교과목명', '학점'])
+            df_all_list = df_all.values.tolist()
+
+            for i in range(len(df_all_list)):
+                if df_all_list[i][0] == "전공선택":
+                    flag = 0
+                    for j in range(len(my_learned_code)):
+                        if df_all_list[i][1] == my_learned_code[j]:
+                            flag=1
+                    if flag == 1:
+                        print("\t(이수)   {} {}".format(df_all_list[i][2], df_all_list[i][3]))
+                        #print("\t{} (이수)".format(df_all_list[i][2]))
+                    else:
+                        print("\t(미이수) {} {}".format(df_all_list[i][2], df_all_list[i][3]))
+                        #print("\t{} (미이수)".format(df_all_list[i][2]))
 
     def print_my_lec(self):
-        for field, require_score in self.my_ge.field.items():
-            my_score = self.min_GE.field[field]
-            print(f"{field} : ( {require_score} / {my_score})")
+        for field, my_score in self.my_ge.field.items():
+            require_score = self.min_GE.field[field]
+            print(f"{field} : ( {my_score} / {require_score})")
 
             if(self.is_specific(field)): #세부영역이 필요한 경우
-                for specific_field, require_score in self.my_ge.specific_field[field].items():
-                    my_score = self.min_GE.specific_field[field][specific_field]
-                    print(f"\t {specific_field} : ( {require_score} / {my_score})")
+                for specific_field, my_score in self.my_ge.specific_field[field].items():
+                    require_score = self.min_GE.specific_field[field][specific_field]
+                    print(f"\t {specific_field} : ( {my_score} / {require_score})")
+                    if(my_score < require_score):
+                        self.print_GE(specific_field)
             elif(field == "전공필수"):
                 self.print_need_lec()
+            elif(field == "전공선택"):
+                self.print_major_selection()
 
     def print_my_ge_lec(self, specific_field):
         df = pd.read_excel("./source/2022lecture.xlsx", dtype = str)
@@ -98,7 +121,7 @@ class my_info:
         my_ge_lec_list = my_ge_lec.values.tolist()
         for i in range(len(my_ge_lec_list)):
             if(my_ge_lec_list[i][0] == specific_field):
-                print(my_ge_lec_list[i][1])
+                print("\t{}".format(my_ge_lec_list[i][1]))
 
     def print_GE(self, specific_field):         # 세부영역 이수 여부 출력
         df_learned= pd.read_excel("./source/learned_mc.xlsx", dtype = str)
@@ -117,8 +140,6 @@ class my_info:
                                     flag=1
                     if flag == 1:
                             print("{} (이수)".format(df_all_list[i][2]))
-                    else:
-                            print("{} (미이수)".format(df_all_list[i][2]))
 
 class lec_field:
     def __init__(self):
