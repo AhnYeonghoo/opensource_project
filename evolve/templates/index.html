@@ -13,20 +13,14 @@
 </head>
 
 <body>
-    <div id="container">
-        <!--전체 문서가 컨테이너로 묶이고, 그 안에 헤더,본문,푸터가 존재.-->
-        <header>
-            <!--헤더는 또 로고와 네비게이션(메뉴)로 나뉨-->
-        </header>
-        <!--헤더 부분 끝-->
-        <div id="slideShow">
-            <!--본문 시작 본문엔 슬라이드 쇼,  컨텐츠로 나뉨-->
-            <div id="slides">
-                {% comment %} <img src="{% static 'main1.jpg'%}" alt="">
-                <img src="{% static 'main2.jpg'%}" alt=""> {% endcomment %}
-                <img src="{% static 'main3.png'%}" alt="">
-                {% comment %} <img src="{% static 'main4.jpg'%}" alt=""> {% endcomment %}
-            </div>
+    <!--헤더 부분 끝-->
+    <div id="slideShow">
+        <!--본문 시작 본문엔 슬라이드 쇼,  컨텐츠로 나뉨-->
+        <div id="slides">
+            <img src="{% static 'main1.jpg'%}" alt="">
+            <img src="{% static 'main2.jpg'%}" alt="">
+            <img src="{% static 'main3.png'%}" alt="">
+            <img src="{% static 'main4.jpg'%}" alt="">
         </div>
     </div>
     <!--본문 끝-->

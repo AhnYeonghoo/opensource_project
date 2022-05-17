@@ -52,6 +52,6 @@ PEP8을 따릅니다.
 
 ## 맴버
 
-- <span style="color:aquamarine">컴퓨터공학과 2학년 복무창(팀장)</span>
+- <span style="color:aquamarine">컴퓨터공학과 2학년 복무창(팀장, )</span>
 - <span style="color:aquamarine">컴퓨터공학과 2학년 박정현</span>
 - <span style="color:aquamarine">컴퓨터공학과 2학년 안영후</span>
