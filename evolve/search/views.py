@@ -115,7 +115,7 @@ def get_my_lecture(request):
 
 def read_user_lecture(request):
     
-    file = pd.read_csv("../media/result/learned.csv")
+    file = pd.read_csv("../media/result/learned.csv", dtype="str")
     lecture_name = file["교과목명"]
     all_lecture = models.GaesinBasicCulture.objects.all()
     context = {}
@@ -130,8 +130,12 @@ def read_user_lecture(request):
 
 def calculator(request):
     
-    document = models.Document.objects.all()
-    context = {}
-    context["doc"] = document
+    if request.POST.get("calculator"):
+        document = models.Document.objects.all()
+        context = {"doc": document}
+    else:
+        document = models.Document.objects.all()
+        context = {"doc": document}
+        
     
     return (request, "calculator.html", context)
