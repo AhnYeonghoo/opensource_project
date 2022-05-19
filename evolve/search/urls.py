@@ -11,4 +11,6 @@ urlpatterns = [
     path('goto_recomand/', views.goto_recomand, name="goto_recomand"),
     path('goto_upload_file/', views.goto_upload_file, name="goto_upload_file"),
     path("contact/", views.contact, name="contact"),
+    path("read_user_lecture", views.read_user_lecture, name="read_user_lecture"),
+    
 ]
