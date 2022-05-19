@@ -1,16 +1,14 @@
 var current = 0;
-
+showSlides();
 function showSlides() {
-  var slides = document.querySelectorAll("#slides > img");
+  let slides = document.querySelectorAll("#slides > img");
   for (let i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
   }
   current++;
-  if (current > slides.length)
-    //만약 마지막 순서면
+  if (current > slides.length) {
     current = 1; //1번째로 이동
-  slides[current - 1].style.display = "block"; //현재 위치 이미지 표시
+  }
+  slides[current - 1].style.display = "block";
   setTimeout(showSlides, 2000);
-  //특정 함수를 반복해서 실행시키는 함수
 }
-showSlides();
