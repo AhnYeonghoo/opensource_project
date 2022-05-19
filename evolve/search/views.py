@@ -127,4 +127,11 @@ def read_user_lecture(request):
     return (request, "result-user-lecture.html", context)
         
     
+
+def calculator(request):
     
+    document = models.Document.objects.all()
+    context = {}
+    context["doc"] = document
+    
+    return (request, "calculator.html", context)
