@@ -139,3 +139,15 @@ def calculator(request):
         
     
     return (request, "calculator.html", context)
+
+def get_my_lecture(request):
+    
+    
+    if request.POST.get("my_lecture"):
+        df =  pd.read_csv("../media/result/learned.csv",usecols=[i for i in range(0,9)])
+        df.columns = ["구분", "영역", "세부영역", "수강년도", "학기", "과목코드", "과목명", "학점", "이수구분"]
+        df = df.sort_values(["과목코드"]).dropna(subset="과목코드").reset_index(drop=True)
+        context = {"my_lec":df}
+        return (request, "my-lecture.html", context)
+    else:
+        redirect(request)

@@ -13,5 +13,6 @@ urlpatterns = [
     path("contact/", views.contact, name="contact"),
     path("read_user_lecture", views.read_user_lecture, name="read_user_lecture"),
     path("calculator", views.calculator, name="calculator"),
+    path("get_my_lecture", views.get_my_lecture, name="get_my_lecture"),
     
 ]
