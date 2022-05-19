@@ -112,3 +112,19 @@ def get_my_lecture(request):
     else:
         return df["과목코드"].tolist()
     
+
+def read_user_lecture(request):
+    
+    file = pd.read_csv("../media/result/learned.csv")
+    lecture_name = file["교과목명"]
+    all_lecture = models.GaesinBasicCulture.objects.all()
+    context = {}
+    if all_lecture["과목명"] in lecture_name:
+        context["complete"] = lecture_name
+    else:
+        context["not_com"] = lecture_name
+    
+    return (request, "result-user-lecture.html", context)
+        
+    
+    
