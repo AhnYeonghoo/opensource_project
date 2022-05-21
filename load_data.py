@@ -7,11 +7,7 @@
 <class> MyInfo
 
 """
-from dataclasses import field
-from numpy import minimum
 import pandas as pd
-import os
-
 from load_my_lecture import get_my_lecture
 from tools import contrast_old_and_new as con
 from tools import Prerequisites_dictionary as pre
@@ -36,20 +32,27 @@ class MyInfo:
         self.min_ge = lec_field().get_field(self.year)
         self.my_ge = self.get_my_score()
 
-    def add_score(self, score='0', field='', specific_field=''):
+    def add_score(self, score='0', field='', sub_field=''):
+        """
+        :param score: string ; available turn to int (yyyy)
+        :param field: string 
+        :param specific_field: string 
+        :return: void
+
+        """
         self.my_ge.field[field] += int(score)
-        if specific_field != '':
-            self.my_ge.specific_field[field][specific_field] += int(score)
+        if sub_field != '':
+            self.my_ge.sub_field[field][sub_field] += int(score)
 
     def get_course_info(self, i):
         field = self.my_lecture.iat[i,1]
         score = self.my_lecture.iat[i,7]
-        specific_field = ''
+        sub_field = ''
         if "전공" == field:
             field = self.my_lecture.iat[i,8]
         elif "자연이공계기초과학"!=field:
-            specific_field = self.my_lecture.iat[i,2]
-        return score, field, specific_field
+            sub_field = self.my_lecture.iat[i,2]
+        return score, field, sub_field
 
     def get_my_score(self):
         self.my_ge = lec_field()
@@ -74,7 +77,7 @@ class MyInfo:
                 flag = True
             print(all_lecture['과목명'].iloc[idx], end="")
             for onn_lec in all_ON_lecture:
-                if flag == False:
+                if flag is False:
                     if lec_code == onn_lec[0]:
                         if onn_lec[4] == "동일":
                             print("->", onn_lec[3], "(변경)",end="")
@@ -83,7 +86,7 @@ class MyInfo:
             print()
 
     def is_specific(self, field):
-        return field in self.my_ge.specific_field.keys()
+        return field in self.my_ge.sub_field.keys()
 
     def print_major_selection(self):
         if self.year < 2020:
@@ -129,8 +132,8 @@ class MyInfo:
             print(f"{field} : ( {my_score} / {require_score})")
 
             if self.is_specific(field): #세부영역이 필요한 경우
-                for specific_field, my_score in self.my_ge.specific_field[field].items():
-                    require_score = self.min_ge.specific_field[field][specific_field]
+                for specific_field, my_score in self.my_ge.sub_field[field].items():
+                    require_score = self.min_ge.sub_field[field][specific_field]
                     print(f"\t {specific_field} : ({my_score} / {require_score})")
                     if my_score < require_score:
                         self.print_ge(specific_field)
@@ -166,7 +169,7 @@ class MyInfo:
 class lec_field:
     def __init__(self):
         self.field = {"개신기초교양":0, "일반교양":0, "확대교양":0, "자연이공계기초과학":0, "전공필수":0, "전공선택":0}
-        self.specific_field = {"개신기초교양": {"인성과비판적사고":0, "의사소통":0, "영어":0,"정보문해":0}, \
+        self.sub_field = {"개신기초교양": {"인성과비판적사고":0, "의사소통":0, "영어":0,"정보문해":0}, \
                                 "일반교양":{"인간과문화":0, "사회와역사":0, "자연과과학":0}, \
                                 "확대교양":{"미래융복합":0,"국제화":0,"진로와취업":0,"예술과체육":0}}
         self.essential_code = {}
@@ -174,7 +177,7 @@ class lec_field:
         if year == 2019:
             self.field = {"개신기초교양":15, "일반교양":12, "확대교양":3, \
                             "자연이공계기초과학":12, "전공필수":34, "전공선택":44}
-            self.specific_field = {"개신기초교양": {"인성과비판적사고":3, "의사소통":3, "영어":3,"정보문해":6}, \
+            self.sub_field = {"개신기초교양": {"인성과비판적사고":3, "의사소통":3, "영어":3,"정보문해":6}, \
                                 "일반교양":{"인간과문화":3, "사회와역사":3, "자연과과학":3}, \
                                 "확대교양":{"미래융복합":0,"국제화":0,"진로와취업":3,"예술과체육":0}}
             self.essential_code = {"자연이공계기초과학": ["0941002", "0941003", "0941006", "0941007"], \
@@ -183,7 +186,7 @@ class lec_field:
                                         '5110023',	'5110096',	'5110097',	'5110086',	'5110100']}
         elif year >= 2020:
             self.field = {"개신기초교양":15, "일반교양":9, "확대교양":3, "자연이공계기초과학":6, "전공필수":28, "전공선택":50}
-            self.specific_field = {"개신기초교양":{"인성과비판적사고":3, "의사소통":3, "영어":3,"정보문해":6},\
+            self.sub_field = {"개신기초교양":{"인성과비판적사고":3, "의사소통":3, "영어":3,"정보문해":6},\
                                 "일반교양":{"인간과문화":3, "사회와역사":3, "자연과과학":3},\
                                 "확대교양":{"미래융복합":0,"국제화":0,"진로와취업":0,"예술과체육":0}}
             self.essential_code = {"전공필수": ['5110001',	'5110122',	'5110123',	'5110005',	\
