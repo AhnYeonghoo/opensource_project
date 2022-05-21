@@ -156,4 +156,6 @@ def print_my_ge_lec(specific_field):
     
     my_ge_lec_list = pd.DataFrame(lecture_in_2022, columns = \
                                             ['분야', '교과목명']).values.tolist()
-                                            
+    for i in range(len(my_ge_lec_list)):
+            if(my_ge_lec_list[i][0] == specific_field):
+                print("\t{}".format(my_ge_lec_list[i][1]))
