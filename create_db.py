@@ -92,18 +92,18 @@ file = file.filter(['학년','과목구분', '과목코드', '과목명', '학�
 pd_file = pd.DataFrame(file).dropna()
 # pd_file = pd_file.query("개설학과=='컴퓨터공학과' or 개설학과=='소프트웨어학과' or 개설학과=='소프트웨어학부'" )
 
-# # 1학기 자연이공계기초
-# class FirstNaturalScience:
+# 1학기 자연이공계기초
+class FirstNaturalScience:
     
-#     학년 = pd_file['학년']
-#     과목구분 = pd_file['과목구분']
-#     과목코드 = pd_file['과목코드']
-#     과목명 = pd_file['과목명']
-#     학점 = pd_file['학점']
-#     학점부여 = pd_file['학점부여']
+    학년 = pd_file['학년']
+    과목구분 = pd_file['과목구분']
+    과목코드 = pd_file['과목코드']
+    과목명 = pd_file['과목명']
+    학점 = pd_file['학점']
+    학점부여 = pd_file['학점부여']
     
-#     def get_info(self):
-#         return pd_file.values.tolist()
+    def get_info(self):
+        return pd_file.values.tolist()
     
 # fns = FirstNaturalScience()
 # fns.get_info()
