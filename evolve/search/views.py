@@ -257,6 +257,9 @@ class Old_and_new:
 class Prerequisites:
     subject_pair_dic = {  # 상위과목 : 선수과목
         '5110007' : '0914002',   # c++ : 기초컴퓨터프로그래밍
+        '5110011' : '5110128',   # 컴퓨터구조 : 논리회로및설계
+        '5110013' : '0621003',   # 선형대수학 : 수학2
+        '5110025' : '5110014',   # 데이터베이스시스템 : 데이터구조
 
 all_ON_lecture = Old_and_new().get_all_lecture()
 all_lecture = pd.read_excel("../source/all_lecture.xlsx",dtype = str)
