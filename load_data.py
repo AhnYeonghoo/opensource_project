@@ -68,7 +68,7 @@ class MyInfo:
         for lec_code in require_major_codes:
             flag = False
             idx = all_lecture['과목코드'].tolist().index(lec_code)
-            if lec_code in prerequisites.keys():
+            if lec_code in prerequisites:
                 idx2 = all_lecture['과목코드'].tolist().index(prerequisites[lec_code])
                 print("   ", all_lecture['과목명'].iloc[idx2]," (필요)",end="")
             print("\t",all_lecture['학점'].iloc[idx],end="")
@@ -97,34 +97,33 @@ class MyInfo:
                 if lec[0] in codes:
                     changed_codes[codes.index(lec[0])] = lec[2]
 
-            li = all_lecture.set_index("과목코드",drop=True)
+            all_lecture_code_df = all_lecture.set_index("과목코드",drop=True)
 
             for lec1, lec2 in zip(codes, changed_codes):
                 if lec1 != lec2:
-                    print("\t(이수)", li.loc[lec1, "과목명"], "->", \
-                        li.loc[lec2, "과목명"], li.loc[lec2, "학점"])
+                    print("\t(이수)", all_lecture_code_df.loc[lec1, "과목명"], "->", \
+                        all_lecture_code_df.loc[lec2, "과목명"], all_lecture_code_df.loc[lec2, "학점"])
                 else:
-                    print("\t(이수)", li.loc[lec1, "과목명"], li.loc[lec2, "학점"])
+                    print("\t(이수)", all_lecture_code_df.loc[lec1, "과목명"], all_lecture_code_df.loc[lec2, "학점"])
             for lec in lecture_in_2022[lecture_in_2022["분야"]=="전공선택"].values.tolist():
                 if lec in codes:
                     continue
                 print("\t(미이수)", lec[4], lec[5])
         else:
             my_learned_code=self.my_lecture["과목코드"].tolist()
-            df = pd.read_excel("./source/2022lecture.xlsx", dtype = str)
-            df_all = pd.DataFrame(df, columns = ['분야', '교과목번호', '교과목명', '학점'])
+            df_all = pd.DataFrame(lecture_in_2022, columns = ['분야', '교과목번호', '교과목명', '학점'])
             df_all_list = df_all.values.tolist()
 
-            for i in range(len(df_all_list)):
+            for i in len(df_all_list):
                 if df_all_list[i][0] == "전공선택":
                     flag = 0
-                    for j in range(len(my_learned_code)):
+                    for j in len(my_learned_code):
                         if df_all_list[i][1] == my_learned_code[j]:
                             flag=1
                     if flag == 1:
-                        print("\t(이수)   {} {}".format(df_all_list[i][2], df_all_list[i][3]))
+                        print(f"\t(이  수) {df_all_list[i][2]} {df_all_list[i][3]}")
                     else:
-                        print("\t(미이수) {} {}".format(df_all_list[i][2], df_all_list[i][3]))
+                        print(f"\t(미이수) {df_all_list[i][2]} {df_all_list[i][3]}")
 
     def print_my_lec(self):
         for field, my_score in self.my_ge.field.items():
