@@ -1,3 +1,12 @@
+"""Provide Class MyInfo and some data
+
+<list> all_ON_lecture
+<data frame> all_lecture
+<data frame> lecture_in_2022
+<dictionary> prerequisites
+<class> MyInfo
+
+"""
 from dataclasses import field
 from numpy import minimum
 import pandas as pd
@@ -11,11 +20,20 @@ all_ON_lecture = con.Old_and_new().get_all_lecture()
 all_lecture = pd.read_excel("./source/all_lecture.xlsx",dtype = str)
 lecture_in_2022 = pd.read_excel("./source/2022lecture.xlsx", dtype = str)
 prerequisites = pre.Prerequisites().subject_pair_dic
-class my_info:
+class MyInfo:
+    """Input my lecture info, automatically calculate score
+    
+    need:
+        learned.xlsx
+
+    feature:
+        void print_my_lec()
+
+    """
     def __init__(self, year=2019, file_name = "learned.xlsx"):
         self.year = year
         self.my_lecture = get_my_lecture(file_name)
-        self.min_GE = lec_field().get_field(self.year)
+        self.min_ge = lec_field().get_field(self.year)
         self.my_ge = self.get_my_score()
 
     def add_score(self, score='0', field='', specific_field=''):
@@ -42,7 +60,7 @@ class my_info:
         return self.my_ge
 
     def print_need_lec(self):
-        require_major_codes = self.min_GE.essential_code["전공필수"]
+        require_major_codes = self.min_ge.essential_code["전공필수"]
         my_major = self.my_lecture[self.my_lecture["영역"].isin(["전공"])]
         for lec_code in require_major_codes:
             flag = False
@@ -107,12 +125,12 @@ class my_info:
 
     def print_my_lec(self):
         for field, my_score in self.my_ge.field.items():
-            require_score = self.min_GE.field[field]
+            require_score = self.min_ge.field[field]
             print(f"{field} : ( {my_score} / {require_score})")
 
             if self.is_specific(field): #세부영역이 필요한 경우
                 for specific_field, my_score in self.my_ge.specific_field[field].items():
-                    require_score = self.min_GE.specific_field[field][specific_field]
+                    require_score = self.min_ge.specific_field[field][specific_field]
                     print(f"\t {specific_field} : ({my_score} / {require_score})")
                     if my_score < require_score:
                         self.print_ge(specific_field)
@@ -125,7 +143,7 @@ class my_info:
         my_ge_lec_list = pd.DataFrame(lecture_in_2022, columns = \
                                             ['분야', '교과목명']).values.tolist()
         for i in range(len(my_ge_lec_list)):
-            if(my_ge_lec_list[i][0] == specific_field):
+            if my_ge_lec_list[i][0] == specific_field:
                 print("\t{}".format(my_ge_lec_list[i][1]))
 
     def print_ge(self, specific_field):         # 세부영역 이수 여부 출력
@@ -152,7 +170,6 @@ class lec_field:
                                 "일반교양":{"인간과문화":0, "사회와역사":0, "자연과과학":0}, \
                                 "확대교양":{"미래융복합":0,"국제화":0,"진로와취업":0,"예술과체육":0}}
         self.essential_code = {}
-    
     def get_field(self, year = 2019):
         if year == 2019:
             self.field = {"개신기초교양":15, "일반교양":12, "확대교양":3, \
