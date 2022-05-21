@@ -266,6 +266,9 @@ class Prerequisites:
     }
 
     def get_lower_code(self, upper_code):
+        for i in self.subject_pair_dic:
+            if i == upper_code:
+                return self.subject_pair_dic[i]
 
 all_ON_lecture = Old_and_new().get_all_lecture()
 all_lecture = pd.read_excel("../source/all_lecture.xlsx",dtype = str)
