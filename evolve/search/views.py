@@ -311,6 +311,7 @@ class MyInfo:
         self.year = year
         self.my_lecture = get_my_lecture(file_name)
         self.min_ge = LecField().get_field(self.year)
+        self.my_ge = self.get_my_score()
 
     def add_score(self, score='0', field='', sub_field=''):
         """
@@ -333,6 +334,14 @@ class MyInfo:
         elif "자연이공계기초과학"!=field:
             sub_field = self.my_lecture.iat[i,2]
         return score, field, sub_field
+
+    def get_my_score(self):
+        self.my_ge = LecField()
+        #8 : 이수구분 1:영역 2:세부영역 5:과목코드 7:학점
+        for i in range(len(self.my_lecture)):
+            info =self.get_course_info(i)
+            self.add_score(info[0], info[1], info[2])
+        return self.my_ge
 
 def print_ge(specific_field):         # 세부영역 이수 여부 출력
        
