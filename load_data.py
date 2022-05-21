@@ -20,16 +20,16 @@ class my_info:
 
     def add_score(self, score='0', field='', specific_field=''):
         self.my_ge.field[field] += int(score)
-        if(specific_field != ''):
+        if specific_field != '':
             self.my_ge.specific_field[field][specific_field] += int(score)
 
     def get_course_info(self, i):
         field = self.my_lecture.iat[i,1]
         score = self.my_lecture.iat[i,7]
         specific_field = ''
-        if("전공" == field):
+        if "전공" == field:
             field = self.my_lecture.iat[i,8]
-        elif("자연이공계기초과학"!=field):
+        elif "자연이공계기초과학"!=field:
             specific_field = self.my_lecture.iat[i,2]
         return score, field, specific_field
 
@@ -42,34 +42,27 @@ class my_info:
         return self.my_ge
 
     def print_need_lec(self):
-            require_major_codes = self.min_GE.essential_code["전공필수"]
-            my_major = self.my_lecture[self.my_lecture["영역"].isin(["전공"])]
-            
-            for lec_code in require_major_codes:
-                flag = False
-                idx = all_lecture['과목코드'].tolist().index(lec_code)
-                if(lec_code in prerequisites.keys()):
-                    idx2 = all_lecture['과목코드'].tolist().index(prerequisites[lec_code])
-                    print("   ", all_lecture['과목명'].iloc[idx2]," (필요)",end="")
-                
-                print("\t",all_lecture['학점'].iloc[idx],end="")
-                
-                if(lec_code in my_major["과목코드"].tolist()):
-                    print("(수강함)",end="")
-                    flag = True
-                
-                print(all_lecture['과목명'].iloc[idx], end="")
-
-                for onn_lec in all_ON_lecture:
-                    if(flag == False):
-                        if(lec_code == onn_lec[0]):
-                            if(onn_lec[4] == "동일"):
-                                print("->", onn_lec[3], "(변경)",end="")
-                            elif(onn_lec[4] == "삭제"):
-                                print("(폐강)",end="")
-                            
-                
-                print()
+        require_major_codes = self.min_GE.essential_code["전공필수"]
+        my_major = self.my_lecture[self.my_lecture["영역"].isin(["전공"])]
+        for lec_code in require_major_codes:
+            flag = False
+            idx = all_lecture['과목코드'].tolist().index(lec_code)
+            if lec_code in prerequisites.keys():
+                idx2 = all_lecture['과목코드'].tolist().index(prerequisites[lec_code])
+                print("   ", all_lecture['과목명'].iloc[idx2]," (필요)",end="")
+            print("\t",all_lecture['학점'].iloc[idx],end="")
+            if lec_code in my_major["과목코드"].tolist():
+                print("(수강함)",end="")
+                flag = True
+            print(all_lecture['과목명'].iloc[idx], end="")
+            for onn_lec in all_ON_lecture:
+                if flag == False:
+                    if lec_code == onn_lec[0]:
+                        if onn_lec[4] == "동일":
+                            print("->", onn_lec[3], "(변경)",end="")
+                        elif onn_lec[4] == "삭제":
+                            print("(폐강)",end="")
+            print()
 
     def is_specific(self, field):
         return field in self.my_ge.specific_field.keys()
