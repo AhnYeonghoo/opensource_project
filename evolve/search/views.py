@@ -254,6 +254,10 @@ class Old_and_new:
            
        return revision_lecture
 
+class Prerequisites:
+    subject_pair_dic = {  # 상위과목 : 선수과목
+        '5110007' : '0914002',   # c++ : 기초컴퓨터프로그래밍
+
 all_ON_lecture = Old_and_new().get_all_lecture()
 all_lecture = pd.read_excel("../source/all_lecture.xlsx",dtype = str)
 lecture_in_2022 = pd.read_excel("../source/2022lecture.xlsx", dtype = str)
