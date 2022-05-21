@@ -253,3 +253,7 @@ class Old_and_new:
                revision_lecture.append([x for x in self.list_[i]])
            
        return revision_lecture
+
+def print_my_ge_lec(self, specific_field):
+        my_ge_lec_list = pd.DataFrame(lecture_in_2022, columns = \
+                                            ['분야', '교과목명']).values.tolist()
