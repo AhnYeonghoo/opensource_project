@@ -80,7 +80,8 @@ class MyInfo:
                             print("->", onn_lec[3], "(변경)",end="")
                         elif onn_lec[4] == "삭제":
                             print("(폐강)",end="")
-            if lec_code in prerequisites:
+            
+            if lec_code in prerequisites and self.year < 2020:
                 idx2 = all_lecture['과목코드'].tolist().index(prerequisites[lec_code])
                 print("   ", all_lecture['과목명'].iloc[idx2]," (필요)",end="")
             print(all_lecture['학점'].iloc[idx],end="")
@@ -115,16 +116,15 @@ class MyInfo:
             df_all = pd.DataFrame(lecture_in_2022, columns = ['분야', '교과목번호', '교과목명', '학점'])
             df_all_list = df_all.values.tolist()
 
-            for i in len(df_all_list):
-                if df_all_list[i][0] == "전공선택":
-                    flag = 0
-                    for j in len(my_learned_code):
-                        if df_all_list[i][1] == my_learned_code[j]:
-                            flag=1
-                    if flag == 1:
-                        print(f"\t(이  수) {df_all_list[i][2]} {df_all_list[i][3]}")
+            for lec in df_all_list:
+                if lec[0] == "전공선택":
+
+                    if lec[1] in my_learned_code:
+                        print(f"\t(이  수) {lec[2]} {lec[3]}")
                     else:
-                        print(f"\t(미이수) {df_all_list[i][2]} {df_all_list[i][3]}")
+                        print(f"\t(미이수) {lec[2]} {lec[3]}")
+                    # for j in len(my_learned_code):
+                    #     if lec[0][i][1] == my_learned_code[j]:
 
     def print_my_lec(self):
         for field, my_score in self.my_ge.field.items():
