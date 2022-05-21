@@ -23,7 +23,7 @@ class my_info:
         if(specific_field != ''):
             self.my_ge.specific_field[field][specific_field] += int(score)
 
-    def get_cource_info(self, i):
+    def get_course_info(self, i):
         field = self.my_lecture.iat[i,1]
         score = self.my_lecture.iat[i,7]
         specific_field = ''
@@ -37,7 +37,7 @@ class my_info:
         self.my_ge = lec_field()
         #8 : 이수구분 1:영역 2:세부영역 5:과목코드 7:학점
         for i in range(len(self.my_lecture)):
-            info =self.get_cource_info(i)
+            info =self.get_course_info(i)
             self.add_score(info[0], info[1], info[2])
         return self.my_ge
 
@@ -72,9 +72,6 @@ class my_info:
                 print()
 
     def is_specific(self, field):
-        """
-        :return type = bool 
-        """
         return field in self.my_ge.specific_field.keys()
 
     def print_major_selection(self):
@@ -93,8 +90,6 @@ class my_info:
                     print("\t(이수)", li.loc[lec1, "과목명"], "->", li.loc[lec2, "과목명"], li.loc[lec2, "학점"])
                 else:
                     print("\t(이수)", li.loc[lec1, "과목명"], li.loc[lec2, "학점"])
-
-
             for lec in lecture_in_2022[lecture_in_2022["분야"]=="전공선택"].values.tolist():
                 if(lec in codes):
                     continue
@@ -126,7 +121,7 @@ class my_info:
                     require_score = self.min_GE.specific_field[field][specific_field]
                     print(f"\t {specific_field} : ( {my_score} / {require_score})")
                     if(my_score < require_score):
-                        self.print_GE(specific_field)
+                        self.print_ge(specific_field)
             elif(field == "전공필수"):
                 self.print_need_lec()
             elif(field == "전공선택"):
