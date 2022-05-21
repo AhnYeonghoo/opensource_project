@@ -263,6 +263,9 @@ class Prerequisites:
         '5110089' : '5110012',   # 분산컴퓨팅시스템 : 정형문법 및 자동화 이론
         '5110099' : '5110014',   # 알고리즘 : 데이터구조
         '5110107' : '5110011'    # 마이크로프로세서 : 컴퓨터구조
+    }
+
+    def get_lower_code(self, upper_code):
 
 all_ON_lecture = Old_and_new().get_all_lecture()
 all_lecture = pd.read_excel("../source/all_lecture.xlsx",dtype = str)
