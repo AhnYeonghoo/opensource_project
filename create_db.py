@@ -129,10 +129,10 @@ class SecondNaturalScience:
 # sns = SecondNaturalScience()
 # sns.get_info()
 
-# file = pd.read_csv("./교육과정/1학기_ocu.csv", encoding='utf-8' ,dtype=str)
-# file = file.filter(['학년','과목구분', '과목코드', '과목명', '학점', '학점부여' ])
-# pd_file = pd.DataFrame(file).dropna()
-# # pd_file = pd_file.query("개설학과=='컴퓨터공학과' or 개설학과=='소프트웨어학과' or 개설학과=='소프트웨어학부'" )
+file = pd.read_csv("./교육과정/1학기_ocu.csv", encoding='utf-8' ,dtype=str)
+file = file.filter(['학년','과목구분', '과목코드', '과목명', '학점', '학점부여' ])
+pd_file = pd.DataFrame(file).dropna()
+# pd_file = pd_file.query("개설학과=='컴퓨터공학과' or 개설학과=='소프트웨어학과' or 개설학과=='소프트웨어학부'" )
 
 # # 1학기,2학기 OCU
 # class Ocu:
