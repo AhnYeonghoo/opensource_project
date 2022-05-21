@@ -342,6 +342,30 @@ class MyInfo:
             info =self.get_course_info(i)
             self.add_score(info[0], info[1], info[2])
         return self.my_ge
+    
+    def print_need_lec(self):
+        require_major_codes = self.min_ge.essential_code["전공필수"]
+        my_major = self.my_lecture[self.my_lecture["영역"].isin(["전공"])]
+        for lec_code in require_major_codes:
+            flag = False
+            idx = all_lecture['과목코드'].tolist().index(lec_code)
+            print(end="\t")
+            if lec_code in my_major["과목코드"].tolist():
+                print("(수강함)",end="")
+                flag = True
+            print(all_lecture['과목명'].iloc[idx], end="")
+            for onn_lec in all_ON_lecture:
+                if flag is False:
+                    if lec_code == onn_lec[0]:
+                        if onn_lec[4] == "동일":
+                            print("->", onn_lec[3], "(변경)",end="")
+                        elif onn_lec[4] == "삭제":
+                            print("(폐강)",end="")
+            if lec_code in prerequisites:
+                idx2 = all_lecture['과목코드'].tolist().index(prerequisites[lec_code])
+                print("   ", all_lecture['과목명'].iloc[idx2]," (필요)",end="")
+            print(all_lecture['학점'].iloc[idx],end="")
+            print()
 
 def print_ge(specific_field):         # 세부영역 이수 여부 출력
        
