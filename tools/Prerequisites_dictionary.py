@@ -1,4 +1,4 @@
-class prerequisites:
+class Prerequisites:
     subject_pair_dic = {  # 상위과목 : 선수과목
         '5110007' : '0914002',   # c++ : 기초컴퓨터프로그래밍
         '5110011' : '5110128',   # 컴퓨터구조 : 논리회로및설계

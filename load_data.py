@@ -10,7 +10,7 @@ from tools import Prerequisites_dictionary as pre
 all_ON_lecture = con.Old_and_new().get_all_lecture()
 all_lecture = pd.read_excel("./source/all_lecture.xlsx",dtype = str)
 lecture_in_2022 = pd.read_excel("./source/2022lecture.xlsx", dtype = str)
-prerequisites = pre.prerequisites().subject_pair_dic
+prerequisites = pre.Prerequisites().subject_pair_dic
 class my_info:
     def __init__(self, year=2019, file_name = "learned.xlsx"):
         self.year = year
@@ -81,13 +81,12 @@ class my_info:
         if self.year < 2020:
             codes = self.my_lecture[self.my_lecture["이수구분"]=="전공선택"]["과목코드"].tolist()
             changed_codes = codes.copy()
+
             for lec in all_ON_lecture:
                 if lec[0] in codes:
                     changed_codes[codes.index(lec[0])] = lec[2]
 
             li = all_lecture.set_index("과목코드",drop=True)
-
-            #print(load_data.prerequisites.keys())
 
             for lec1, lec2 in zip(codes, changed_codes):
                 if(lec1 != lec2):
@@ -114,10 +113,8 @@ class my_info:
                             flag=1
                     if flag == 1:
                         print("\t(이수)   {} {}".format(df_all_list[i][2], df_all_list[i][3]))
-                        #print("\t{} (이수)".format(df_all_list[i][2]))
                     else:
                         print("\t(미이수) {} {}".format(df_all_list[i][2], df_all_list[i][3]))
-                        #print("\t{} (미이수)".format(df_all_list[i][2]))
 
     def print_my_lec(self):
         for field, my_score in self.my_ge.field.items():
@@ -143,7 +140,7 @@ class my_info:
             if(my_ge_lec_list[i][0] == specific_field):
                 print("\t{}".format(my_ge_lec_list[i][1]))
 
-    def print_GE(self, specific_field):         # 세부영역 이수 여부 출력
+    def print_ge(self, specific_field):         # 세부영역 이수 여부 출력
         my_learned_list = pd.DataFrame(self.my_lecture, columns=['영역','세부영역','교과목번호','교과목명','이수구분']).values.tolist()
         df_all_list = pd.DataFrame(lecture_in_2022, columns = ['분야', '교과목번호', '교과목명']).values.tolist()
 
