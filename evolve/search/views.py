@@ -140,20 +140,6 @@ def calculator(request):
     
     return (request, "calculator.html", context)
 
-def get_my_lecture(request):
-    
-    
-    if request.POST.get("my_lec"):
-        df =  pd.read_csv("../media/result/learned.csv",usecols=[i for i in range(0,9)])
-        df.columns = ["구분", "영역", "세부영역", "수강년도", "학기", "과목코드", "과목명", "학점", "이수구분"]
-        df = df.sort_values(["과목코드"]).dropna(subset="과목코드").reset_index(drop=True)
-        context = {"my_lec":df}
-        return (request, "my-lecture.html", context)
-    else:
-        redirect(request)
-        
-
-
 class Old_and_new:
     
     '''
@@ -325,6 +311,18 @@ class MyInfo:
         self.year = year
         self.my_lecture = get_my_lecture(file_name)
         self.min_ge = LecField().get_field(self.year)
+
+    def add_score(self, score='0', field='', sub_field=''):
+        """
+        :param score: string ; available turn to int (yyyy)
+        :param field: string 
+        :param specific_field: string 
+        :return: void
+
+        """
+        self.my_ge.field[field] += int(score)
+        if sub_field != '':
+            self.my_ge.sub_field[field][sub_field] += int(score)
 
 def print_ge(specific_field):         # 세부영역 이수 여부 출력
        
