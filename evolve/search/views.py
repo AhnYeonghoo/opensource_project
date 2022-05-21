@@ -229,3 +229,13 @@ class Old_and_new:
                new_lecture.append([x for x in self.list_[i]])
     
        return new_lecture
+   
+    # 삭제 과목만 뱉기
+    def get_old_lecture(self):
+       old_lecture = []
+
+       for i in range(len(self.list_) - 1):
+           if len(self.list_[i]) != 0 and self.list_[i][2]=='':
+               old_lecture.append([x for x in self.list_[i]])
+        
+       return old_lecture
