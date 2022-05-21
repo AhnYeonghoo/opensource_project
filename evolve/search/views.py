@@ -380,6 +380,16 @@ class MyInfo:
                     changed_codes[codes.index(lec[0])] = lec[2]
 
             all_lecture_code_df = all_lecture.set_index("과목코드",drop=True)
+            for lec1, lec2 in zip(codes, changed_codes):
+                if lec1 != lec2:
+                    print("\t(이수)", all_lecture_code_df.loc[lec1, "과목명"], "->", \
+                        all_lecture_code_df.loc[lec2, "과목명"], all_lecture_code_df.loc[lec2, "학점"])
+                else:
+                    print("\t(이수)", all_lecture_code_df.loc[lec1, "과목명"], all_lecture_code_df.loc[lec2, "학점"])
+            for lec in lecture_in_2022[lecture_in_2022["분야"]=="전공선택"].values.tolist():
+                if lec in codes:
+                    continue
+                print("\t(미이수)", lec[4], lec[5])
 
 def print_ge(specific_field):         # 세부영역 이수 여부 출력
        
