@@ -367,6 +367,20 @@ class MyInfo:
             print(all_lecture['학점'].iloc[idx],end="")
             print()
 
+    def is_specific(self, field):
+        return field in self.my_ge.sub_field.keys()
+
+    def print_major_selection(self):
+        if self.year < 2020:
+            codes = self.my_lecture[self.my_lecture["이수구분"]=="전공선택"]["과목코드"].tolist()
+            changed_codes = codes.copy()
+
+            for lec in all_ON_lecture:
+                if lec[0] in codes:
+                    changed_codes[codes.index(lec[0])] = lec[2]
+
+            all_lecture_code_df = all_lecture.set_index("과목코드",drop=True)
+
 def print_ge(specific_field):         # 세부영역 이수 여부 출력
        
     my_learned_list = pd.DataFrame(my_lecture, columns= \
