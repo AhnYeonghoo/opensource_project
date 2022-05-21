@@ -170,3 +170,6 @@ def print_ge(self, specific_field):         # 세부영역 이수 여부 출력
                 flag=0
                 for j in range(len(my_learned_list)):
                     if df_all_list[i][1] == my_learned_list[j][2]:
+                        flag=1
+                if flag == 1:
+                    print("\t\t{} (이수)".format(df_all_list[i][2]))
