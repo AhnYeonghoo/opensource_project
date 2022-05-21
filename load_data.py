@@ -81,14 +81,12 @@ class my_info:
         if self.year < 2020:
             codes = self.my_lecture[self.my_lecture["이수구분"]=="전공선택"]["과목코드"].tolist()
             changed_codes = codes.copy()
-            
+
             for lec in all_ON_lecture:
                 if lec[0] in codes:
                     changed_codes[codes.index(lec[0])] = lec[2]
 
             li = all_lecture.set_index("과목코드",drop=True)
-
-            #print(load_data.prerequisites.keys())
 
             for lec1, lec2 in zip(codes, changed_codes):
                 if(lec1 != lec2):
@@ -115,10 +113,8 @@ class my_info:
                             flag=1
                     if flag == 1:
                         print("\t(이수)   {} {}".format(df_all_list[i][2], df_all_list[i][3]))
-                        #print("\t{} (이수)".format(df_all_list[i][2]))
                     else:
                         print("\t(미이수) {} {}".format(df_all_list[i][2], df_all_list[i][3]))
-                        #print("\t{} (미이수)".format(df_all_list[i][2]))
 
     def print_my_lec(self):
         for field, my_score in self.my_ge.field.items():
