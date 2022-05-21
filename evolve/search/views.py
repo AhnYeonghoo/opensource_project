@@ -159,3 +159,6 @@ def print_my_ge_lec(specific_field):
     for i in range(len(my_ge_lec_list)):
             if(my_ge_lec_list[i][0] == specific_field):
                 print("\t{}".format(my_ge_lec_list[i][1]))
+def print_ge(self, specific_field):         # 세부영역 이수 여부 출력
+        my_learned_list = pd.DataFrame(self.my_lecture, columns= \
+                                        ['영역','세부영역','교과목번호','교과목명','이수구분']).values.tolist()
