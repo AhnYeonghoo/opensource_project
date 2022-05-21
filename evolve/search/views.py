@@ -254,28 +254,49 @@ class Old_and_new:
            
        return revision_lecture
 
+class Prerequisites:
+    subject_pair_dic = {  # 상위과목 : 선수과목
+        '5110007' : '0914002',   # c++ : 기초컴퓨터프로그래밍
+        '5110011' : '5110128',   # 컴퓨터구조 : 논리회로및설계
+        '5110013' : '0621003',   # 선형대수학 : 수학2
+        '5110025' : '5110014',   # 데이터베이스시스템 : 데이터구조
+        '5110089' : '5110012',   # 분산컴퓨팅시스템 : 정형문법 및 자동화 이론
+        '5110099' : '5110014',   # 알고리즘 : 데이터구조
+        '5110107' : '5110011'    # 마이크로프로세서 : 컴퓨터구조
+    }
+
+    def get_lower_code(self, upper_code):
+        for i in self.subject_pair_dic:
+            if i == upper_code:
+                return self.subject_pair_dic[i]
+
+all_ON_lecture = Old_and_new().get_all_lecture()
+all_lecture = pd.read_excel("../source/all_lecture.xlsx",dtype = str)
+lecture_in_2022 = pd.read_excel("../source/2022lecture.xlsx", dtype = str)
+prerequisites = Prerequisites().subject_pair_dic
+
 def print_my_ge_lec(specific_field):
         
-        my_ge_lec_list = pd.DataFrame(lecture_in_2022, columns = \
-                                            ['분야', '교과목명']).values.tolist()
-        for i in range(len(my_ge_lec_list)):
-            if(my_ge_lec_list[i][0] == specific_field):
-                print("\t{}".format(my_ge_lec_list[i][1]))
+    my_ge_lec_list = pd.DataFrame(lecture_in_2022, columns = \
+                                        ['분야', '교과목명']).values.tolist()
+    for i in range(len(my_ge_lec_list)):
+        if(my_ge_lec_list[i][0] == specific_field):
+            print("\t{}".format(my_ge_lec_list[i][1]))
 
- def print_ge(specific_field):         # 세부영역 이수 여부 출력
+def print_ge(specific_field):         # 세부영역 이수 여부 출력
        
-        my_learned_list = pd.DataFrame(my_lecture, columns= \
-                                        ['영역','세부영역','교과목번호','교과목명','이수구분']).values.tolist()
-        df_all_list = pd.DataFrame(lecture_in_2022, columns = \
-                                        ['분야', '교과목번호', '교과목명']).values.tolist()
-        
-        for i in range(len(df_all_list)):
-            if df_all_list[i][0] == specific_field:
-                flag=0
-                for j in range(len(my_learned_list)):
-                    if df_all_list[i][1] == my_learned_list[j][2]:
-                        flag=1
-                if flag == 1:
-                    print("\t\t{} (이수)".format(df_all_list[i][2]))
-                else:
-                    print("\t\t{} (미이수)".format(df_all_list[i][2]))
+    my_learned_list = pd.DataFrame(my_lecture, columns= \
+                                    ['영역','세부영역','교과목번호','교과목명','이수구분']).values.tolist()
+    df_all_list = pd.DataFrame(lecture_in_2022, columns = \
+                                    ['분야', '교과목번호', '교과목명']).values.tolist()
+    
+    for i in range(len(df_all_list)):
+        if df_all_list[i][0] == specific_field:
+            flag=0
+            for j in range(len(my_learned_list)):
+                if df_all_list[i][1] == my_learned_list[j][2]:
+                    flag=1
+            if flag == 1:
+                print("\t\t{} (이수)".format(df_all_list[i][2]))
+            else:
+                print("\t\t{} (미이수)".format(df_all_list[i][2]))
