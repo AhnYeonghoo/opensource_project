@@ -151,3 +151,28 @@ def get_my_lecture(request):
         return (request, "my-lecture.html", context)
     else:
         redirect(request)
+
+def print_my_ge_lec(specific_field):    # 나의 이수 강의 출력
+    
+    my_ge_lec_list = pd.DataFrame(lecture_in_2022, columns = \
+                                            ['분야', '교과목명']).values.tolist()
+    for i in range(len(my_ge_lec_list)):
+            if(my_ge_lec_list[i][0] == specific_field):
+                print("\t{}".format(my_ge_lec_list[i][1]))
+                
+def print_ge(specific_field):         # 세부영역 이수 여부 출력
+        my_learned_list = pd.DataFrame(my_lecture, columns= \
+                                        ['영역','세부영역','교과목번호','교과목명','이수구분']).values.tolist()
+        df_all_list = pd.DataFrame(lecture_in_2022, columns = \
+                                        ['분야', '교과목번호', '교과목명']).values.tolist()
+
+        for i in range(len(df_all_list)):
+            if df_all_list[i][0] == specific_field:
+                flag=0
+                for j in range(len(my_learned_list)):
+                    if df_all_list[i][1] == my_learned_list[j][2]:
+                        flag=1
+                if flag == 1:
+                    print("\t\t{} (이수)".format(df_all_list[i][2]))
+                else:
+                    print("\t\t{} (미이수)".format(df_all_list[i][2]))
