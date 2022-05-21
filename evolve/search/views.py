@@ -239,3 +239,17 @@ class Old_and_new:
                old_lecture.append([x for x in self.list_[i]])
         
        return old_lecture
+   
+   # 모든 과목 뱉기
+    def get_all_lecture(self):
+       return self.list_
+   
+   # 개정된 과목만 뱉기
+    def get_revision_lecture(self):
+       revision_lecture = []
+       
+       for i in range(len(self.list_) - 1):
+           if len(self.list_[i]) != 0 and not self.list_[i][0] == '' and not self.list_[i][2] == '':
+               revision_lecture.append([x for x in self.list_[i]])
+           
+       return revision_lecture
