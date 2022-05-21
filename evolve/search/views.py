@@ -167,3 +167,6 @@ def print_ge(self, specific_field):         # 세부영역 이수 여부 출력
 
         for i in range(len(df_all_list)):
             if df_all_list[i][0] == specific_field:
+                flag=0
+                for j in range(len(my_learned_list)):
+                    if df_all_list[i][1] == my_learned_list[j][2]:
