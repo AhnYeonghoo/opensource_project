@@ -16,6 +16,7 @@
 
 <body>
 
+
     {% block header %}
     <main>
         <header class="p-3 bg-dark text-white">
@@ -42,6 +43,10 @@
     </main>
     {% endblock %}
     <!-- 기본 템플릿 안에 삽입될 내용 Start -->
+    {% for i in fuck %}
+    <br>
+    {{i}}
+    {% endfor %}
     {% block content %} {% endblock %}
 </body>
 
