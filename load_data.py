@@ -29,7 +29,7 @@ class MyInfo:
     def __init__(self, year=2019, file_name = "learned.xlsx"):
         self.year = year
         self.my_lecture = get_my_lecture(file_name)
-        self.min_ge = lec_field().get_field(self.year)
+        self.min_ge = LecField().get_field(self.year)
         self.my_ge = self.get_my_score()
 
     def add_score(self, score='0', field='', sub_field=''):
@@ -55,7 +55,7 @@ class MyInfo:
         return score, field, sub_field
 
     def get_my_score(self):
-        self.my_ge = lec_field()
+        self.my_ge = LecField()
         #8 : 이수구분 1:영역 2:세부영역 5:과목코드 7:학점
         for i in range(len(self.my_lecture)):
             info =self.get_course_info(i)
@@ -144,9 +144,9 @@ class MyInfo:
     def print_my_ge_lec(self, specific_field):
         my_ge_lec_list = pd.DataFrame(lecture_in_2022, columns = \
                                             ['분야', '교과목명']).values.tolist()
-        for i in range(len(my_ge_lec_list)):
+        for i in len(my_ge_lec_list):
             if my_ge_lec_list[i][0] == specific_field:
-                print("\t{}".format(my_ge_lec_list[i][1]))
+                print(f"\t{my_ge_lec_list[i][1]}")
 
     def print_ge(self, specific_field):         # 세부영역 이수 여부 출력
         my_learned_list = pd.DataFrame(self.my_lecture, columns= \
@@ -154,18 +154,18 @@ class MyInfo:
         df_all_list = pd.DataFrame(lecture_in_2022, columns = \
                                         ['분야', '교과목번호', '교과목명']).values.tolist()
 
-        for i in range(len(df_all_list)):
+        for i in len(df_all_list):
             if df_all_list[i][0] == specific_field:
                 flag=0
-                for j in range(len(my_learned_list)):
+                for j in len(my_learned_list):
                     if df_all_list[i][1] == my_learned_list[j][2]:
                         flag=1
                 if flag == 1:
-                    print("\t\t{} (이수)".format(df_all_list[i][2]))
+                    print(f"\t\t(이  수) {df_all_list[i][2]}")
                 else:
-                    print("\t\t{} (미이수)".format(df_all_list[i][2]))
+                    print(f"\t\t(미이수) {df_all_list[i][2]}")
 
-class lec_field:
+class LecField:
     def __init__(self):
         self.field = {"개신기초교양":0, "일반교양":0, "확대교양":0, "자연이공계기초과학":0, "전공필수":0, "전공선택":0}
         self.sub_field = {"개신기초교양": {"인성과비판적사고":0, "의사소통":0, "영어":0,"정보문해":0}, \
