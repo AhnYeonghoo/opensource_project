@@ -151,3 +151,9 @@ def get_my_lecture(request):
         return (request, "my-lecture.html", context)
     else:
         redirect(request)
+
+def print_my_ge_lec(specific_field):
+    
+    my_ge_lec_list = pd.DataFrame(lecture_in_2022, columns = \
+                                            ['분야', '교과목명']).values.tolist()
+                                            
