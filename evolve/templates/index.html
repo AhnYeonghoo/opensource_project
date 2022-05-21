@@ -1,38 +1,37 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 {% block content %}
-<html lang="en">
+{% load static %}
+<!DOCTYPE html>
+<html lang="Ko">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+
 </head>
 
-
 <body>
-    <h1 style="color:blue"> 계산하고자 하는 학점이수목록 엑셀 파일을 업로드 해주세요. </h1>
-    <form action="{% url 'search:upload_file' %}" method="POST" enctype="multipart/form-data">
-        <input type="text" name="title" placeholder="학번을 입력하세요.">
-        <input type="file" name="uploaded_file">
-        {% csrf_token %}
-        <input type="submit" value="Upload">
-    </form>
-
-
-
-    <br>
-    <br>
-    <h1 style="color:blue">관심있는 분야를 선택하세요</h1>
-    <form action="{% url 'search:recomand' %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="submit" value="게임" name="game">
-        <input type="submit" value="앱" name="app">
-        <input type="submit" value="네트워크" name="network">
-        <input type="submit" value="임베디드" name="embedded">
-        <input type="submit" value="인공지능" name="ai">
-    </form>
-
+    <!--헤더 부분 끝
+        -->
+    <div id="slideShow">
+        <div id="slides">
+            <img src="{% static 'main1.jpg'%}" alt="">
+            <img src="{% static 'main2.jpg'%}" alt="">
+            <img src="{% static 'main3.png'%}" alt="">
+            <img src="{% static 'main4.jpg'%}" alt="">
+        </div>
+    </div>
+    <!--본문 끝-->
+    <footer>
+        <!--푸터-->
+        <div id="company">
+            <p>충청북도 청주시 서원구 충대로 1 E8-1 공학관 (대표전화)010-3568-3462</p>
+        </div>
+    </footer>
+    <script src="{% static 'slideshow.js' %}"></script>
 </body>
 
-</html> {% endblock %}
+</html>
+{% endblock %}
