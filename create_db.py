@@ -43,10 +43,10 @@ class SecondSemesterMajor:
 # ssm = SecondSemesterMajor()
 # ssm.get_info()
 
-# file = pd.read_csv("./교육과정/1학기_소웨전공.csv", encoding='utf-8' ,dtype=str)
-# file = file.filter(['학년','과목구분', '과목코드', '과목명', '학점', '학점부여' ])
-# pd_file = pd.DataFrame(file).dropna()
-# # pd_file = pd_file.query("개설학과=='컴퓨터공학과' or 개설학과=='소프트웨어학과' or 개설학과=='소프트웨어학부'" )
+file = pd.read_csv("./교육과정/1학기_소웨전공.csv", encoding='utf-8' ,dtype=str)
+file = file.filter(['학년','과목구분', '과목코드', '과목명', '학점', '학점부여' ])
+pd_file = pd.DataFrame(file).dropna()
+# pd_file = pd_file.query("개설학과=='컴퓨터공학과' or 개설학과=='소프트웨어학과' or 개설학과=='소프트웨어학부'" )
 
 # # 1학기 소웨 전공
 # class FirstSemesterSWMajor:
