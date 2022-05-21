@@ -68,10 +68,7 @@ class MyInfo:
         for lec_code in require_major_codes:
             flag = False
             idx = all_lecture['과목코드'].tolist().index(lec_code)
-            if lec_code in prerequisites:
-                idx2 = all_lecture['과목코드'].tolist().index(prerequisites[lec_code])
-                print("   ", all_lecture['과목명'].iloc[idx2]," (필요)",end="")
-            print("\t",all_lecture['학점'].iloc[idx],end="")
+            print(end="\t")
             if lec_code in my_major["과목코드"].tolist():
                 print("(수강함)",end="")
                 flag = True
@@ -83,6 +80,10 @@ class MyInfo:
                             print("->", onn_lec[3], "(변경)",end="")
                         elif onn_lec[4] == "삭제":
                             print("(폐강)",end="")
+            if lec_code in prerequisites:
+                idx2 = all_lecture['과목코드'].tolist().index(prerequisites[lec_code])
+                print("   ", all_lecture['과목명'].iloc[idx2]," (필요)",end="")
+            print(all_lecture['학점'].iloc[idx],end="")
             print()
 
     def is_specific(self, field):
@@ -154,10 +155,10 @@ class MyInfo:
         df_all_list = pd.DataFrame(lecture_in_2022, columns = \
                                         ['분야', '교과목번호', '교과목명']).values.tolist()
 
-        for i in len(df_all_list):
+        for i in range(len(df_all_list)):
             if df_all_list[i][0] == specific_field:
                 flag=0
-                for j in len(my_learned_list):
+                for j in range(len(my_learned_list)):
                     if df_all_list[i][1] == my_learned_list[j][2]:
                         flag=1
                 if flag == 1:
