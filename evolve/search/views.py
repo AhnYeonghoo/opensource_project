@@ -311,6 +311,21 @@ def print_my_ge_lec(specific_field):
         if(my_ge_lec_list[i][0] == specific_field):
             print("\t{}".format(my_ge_lec_list[i][1]))
 
+class MyInfo:
+    """Input my lecture info, automatically calculate score
+    
+    need:
+        learned.xlsx
+
+    feature:
+        void print_my_lec()
+
+    """
+    def __init__(self, year=2019, file_name = "learned.xlsx"):
+        self.year = year
+        self.my_lecture = get_my_lecture(file_name)
+        self.min_ge = LecField().get_field(self.year)
+
 def print_ge(specific_field):         # 세부영역 이수 여부 출력
        
     my_learned_list = pd.DataFrame(my_lecture, columns= \
