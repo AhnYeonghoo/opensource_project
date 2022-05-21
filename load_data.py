@@ -23,7 +23,7 @@ class my_info:
         if(specific_field != ''):
             self.my_ge.specific_field[field][specific_field] += int(score)
 
-    def get_cource_info(self, i):
+    def get_course_info(self, i):
         field = self.my_lecture.iat[i,1]
         score = self.my_lecture.iat[i,7]
         specific_field = ''
@@ -37,7 +37,7 @@ class my_info:
         self.my_ge = lec_field()
         #8 : 이수구분 1:영역 2:세부영역 5:과목코드 7:학점
         for i in range(len(self.my_lecture)):
-            info =self.get_cource_info(i)
+            info =self.get_course_info(i)
             self.add_score(info[0], info[1], info[2])
         return self.my_ge
 
@@ -72,9 +72,6 @@ class my_info:
                 print()
 
     def is_specific(self, field):
-        """
-        :return type = bool 
-        """
         return field in self.my_ge.specific_field.keys()
 
     def print_major_selection(self):
@@ -93,8 +90,6 @@ class my_info:
                     print("\t(이수)", li.loc[lec1, "과목명"], "->", li.loc[lec2, "과목명"], li.loc[lec2, "학점"])
                 else:
                     print("\t(이수)", li.loc[lec1, "과목명"], li.loc[lec2, "학점"])
-
-
             for lec in lecture_in_2022[lecture_in_2022["분야"]=="전공선택"].values.tolist():
                 if(lec in codes):
                     continue
@@ -124,36 +119,37 @@ class my_info:
             if(self.is_specific(field)): #세부영역이 필요한 경우
                 for specific_field, my_score in self.my_ge.specific_field[field].items():
                     require_score = self.min_GE.specific_field[field][specific_field]
-                    print(f"\t {specific_field} : ( {my_score} / {require_score})")
+                    print(f"\t {specific_field} : ({my_score} / {require_score})")
                     if(my_score < require_score):
-                        self.print_GE(specific_field)
+                        self.print_ge(specific_field)
             elif(field == "전공필수"):
                 self.print_need_lec()
             elif(field == "전공선택"):
                 self.print_major_selection()
 
     def print_my_ge_lec(self, specific_field):
-        df = pd.read_excel("./source/2022lecture.xlsx", dtype = str)
-        my_ge_lec = pd.DataFrame(df, columns = ['분야', '교과목명'])
-        my_ge_lec_list = my_ge_lec.values.tolist()
+        my_ge_lec_list = pd.DataFrame(lecture_in_2022, columns = \
+                                            ['분야', '교과목명']).values.tolist()
         for i in range(len(my_ge_lec_list)):
             if(my_ge_lec_list[i][0] == specific_field):
                 print("\t{}".format(my_ge_lec_list[i][1]))
 
     def print_ge(self, specific_field):         # 세부영역 이수 여부 출력
-        my_learned_list = pd.DataFrame(self.my_lecture, columns=['영역','세부영역','교과목번호','교과목명','이수구분']).values.tolist()
-        df_all_list = pd.DataFrame(lecture_in_2022, columns = ['분야', '교과목번호', '교과목명']).values.tolist()
+        my_learned_list = pd.DataFrame(self.my_lecture, columns= \
+                                        ['영역','세부영역','교과목번호','교과목명','이수구분']).values.tolist()
+        df_all_list = pd.DataFrame(lecture_in_2022, columns = \
+                                        ['분야', '교과목번호', '교과목명']).values.tolist()
 
         for i in range(len(df_all_list)):
             if df_all_list[i][0] == specific_field:
-                    flag=0
-                    for j in range(len(my_learned_list)):
-                            if df_all_list[i][1] == my_learned_list[j][2]:
-                                    flag=1
-                    if flag == 1:
-                            print("\t\t{} (이수)".format(df_all_list[i][2]))
-                    else:
-                            print("\t\t{} (미이수)".format(df_all_list[i][2]))
+                flag=0
+                for j in range(len(my_learned_list)):
+                    if df_all_list[i][1] == my_learned_list[j][2]:
+                        flag=1
+                if flag == 1:
+                    print("\t\t{} (이수)".format(df_all_list[i][2]))
+                else:
+                    print("\t\t{} (미이수)".format(df_all_list[i][2]))
 
 class lec_field:
     def __init__(self):
@@ -165,16 +161,21 @@ class lec_field:
     
     def get_field(self, year = 2019):
         if(year == 2019):
-            self.field = {"개신기초교양":15, "일반교양":12, "확대교양":3, "자연이공계기초과학":12, "전공필수":34, "전공선택":44}
+            self.field = {"개신기초교양":15, "일반교양":12, "확대교양":3, \
+                            "자연이공계기초과학":12, "전공필수":34, "전공선택":44}
             self.specific_field = {"개신기초교양": {"인성과비판적사고":3, "의사소통":3, "영어":3,"정보문해":6}, \
                                 "일반교양":{"인간과문화":3, "사회와역사":3, "자연과과학":3}, \
                                 "확대교양":{"미래융복합":0,"국제화":0,"진로와취업":3,"예술과체육":0}}
             self.essential_code = {"자연이공계기초과학": ["0941002", "0941003", "0941006", "0941007"], \
-                                    "전공필수": ['5110090',	'5110091',	'5110003',	'5110005',	'5110046',	'5110092',	'5110009',	'5110011',	'5110014',	'5110094',	'5110016',	'5110095',	'5110107',	'5110023',	'5110096',	'5110097',	'5110086',	'5110100']}
+                                    "전공필수": ['5110090',	'5110091',	'5110003',	'5110005',	'5110046',	'5110092',	\
+                                        '5110009',	'5110011',	'5110014',	'5110094',	'5110016',	'5110095',	'5110107',	\
+                                        '5110023',	'5110096',	'5110097',	'5110086',	'5110100']}
         elif(year >= 2020):
             self.field = {"개신기초교양":15, "일반교양":9, "확대교양":3, "자연이공계기초과학":6, "전공필수":28, "전공선택":50}
             self.specific_field = {"개신기초교양":{"인성과비판적사고":3, "의사소통":3, "영어":3,"정보문해":6},\
                                 "일반교양":{"인간과문화":3, "사회와역사":3, "자연과과학":3},\
                                 "확대교양":{"미래융복합":0,"국제화":0,"진로와취업":0,"예술과체육":0}}
-            self.essential_code = {"전공필수": ['5110001',	'5110122',	'5110123',	'5110005',	'5110121',	'5110014',	'5110032',	'5110126',	'5110011',	'5110016',	'5110018',	'5110130',	'5110131',	'5110133',	'5110135']}
+            self.essential_code = {"전공필수": ['5110001',	'5110122',	'5110123',	'5110005',	\
+                                    '5110121',	'5110014',	'5110032',	'5110126',	'5110011',	'5110016',	'5110018',	\
+                                    '5110130',	'5110131',	'5110133',	'5110135']}
         return self
