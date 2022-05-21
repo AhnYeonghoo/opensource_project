@@ -254,6 +254,15 @@ class Old_and_new:
            
        return revision_lecture
 
-def print_my_ge_lec(self, specific_field):
+def print_my_ge_lec(specific_field):
+        
         my_ge_lec_list = pd.DataFrame(lecture_in_2022, columns = \
                                             ['분야', '교과목명']).values.tolist()
+        for i in range(len(my_ge_lec_list)):
+            if(my_ge_lec_list[i][0] == specific_field):
+                print("\t{}".format(my_ge_lec_list[i][1]))
+
+ def print_ge(specific_field):         # 세부영역 이수 여부 출력
+       
+        my_learned_list = pd.DataFrame(self.my_lecture, columns= \
+                                        ['영역','세부영역','교과목번호','교과목명','이수구분']).values.tolist()
