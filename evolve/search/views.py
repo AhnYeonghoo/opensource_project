@@ -390,6 +390,36 @@ class MyInfo:
                 if lec in codes:
                     continue
                 print("\t(미이수)", lec[4], lec[5])
+        else:
+            my_learned_code=self.my_lecture["과목코드"].tolist()
+            df_all = pd.DataFrame(lecture_in_2022, columns = ['분야', '교과목번호', '교과목명', '학점'])
+            df_all_list = df_all.values.tolist()
+
+            for i in len(df_all_list):
+                if df_all_list[i][0] == "전공선택":
+                    flag = 0
+                    for j in len(my_learned_code):
+                        if df_all_list[i][1] == my_learned_code[j]:
+                            flag=1
+                    if flag == 1:
+                        print(f"\t(이  수) {df_all_list[i][2]} {df_all_list[i][3]}")
+                    else:
+                        print(f"\t(미이수) {df_all_list[i][2]} {df_all_list[i][3]}")
+    def print_my_lec(self):
+        for field, my_score in self.my_ge.field.items():
+            require_score = self.min_ge.field[field]
+            print(f"{field} : ( {my_score} / {require_score})")
+
+            if self.is_specific(field): #세부영역이 필요한 경우
+                for specific_field, my_score in self.my_ge.sub_field[field].items():
+                    require_score = self.min_ge.sub_field[field][specific_field]
+                    print(f"\t {specific_field} : ({my_score} / {require_score})")
+                    if my_score < require_score:
+                        self.print_ge(specific_field)
+            elif field == "전공필수":
+                self.print_need_lec()
+            elif field == "전공선택":
+                self.print_major_selection()
 
 def print_ge(specific_field):         # 세부영역 이수 여부 출력
        
