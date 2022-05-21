@@ -219,3 +219,13 @@ class Old_and_new:
      ['5110078', '엔터테인먼트융합', '', '', '삭제'],
      ['5110105', '리눅스시스템', '', '', '삭제'],
      ]
+    
+    # 신설 과목만 뱉기 
+    def get_new_lecture(self):
+       new_lecture = []
+          
+       for i in range(len(self.list_) - 1):
+           if len(self.list_[i]) != 0 and self.list_[i][0] == '':
+               new_lecture.append([x for x in self.list_[i]])
+    
+       return new_lecture
