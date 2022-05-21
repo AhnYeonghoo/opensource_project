@@ -323,6 +323,16 @@ class MyInfo:
         self.my_ge.field[field] += int(score)
         if sub_field != '':
             self.my_ge.sub_field[field][sub_field] += int(score)
+        
+    def get_course_info(self, i):
+        field = self.my_lecture.iat[i,1]
+        score = self.my_lecture.iat[i,7]
+        sub_field = ''
+        if "전공" == field:
+            field = self.my_lecture.iat[i,8]
+        elif "자연이공계기초과학"!=field:
+            sub_field = self.my_lecture.iat[i,2]
+        return score, field, sub_field
 
 def print_ge(specific_field):         # 세부영역 이수 여부 출력
        
