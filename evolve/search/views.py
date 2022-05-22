@@ -114,8 +114,12 @@ def get_my_lecture(request):
     #     return df["과목코드"].tolist()
     c = load_data.MyInfo()
     l = []
-    for key, val in c.my_ge.field.items():
-        a = {"field":key, "my_score":val, "min_score":c.min_ge.field[key]}
+    for field, my_score in c.my_ge.field.items():
+        a = {"field":field, "my_score":my_score, "min_score":c.min_ge.field[field], "sub_field":[]}
+        if c.is_specific(field):
+            for sub_field, m_score in c.my_ge.sub_field[field].items():
+                b = {"sub_field":sub_field,"my_score":m_score, "min_score":c.min_ge.sub_field[field][sub_field]}
+                a["sub_field"].append(b)
         l.append(a)
     
     context = {
