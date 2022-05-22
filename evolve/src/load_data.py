@@ -8,13 +8,33 @@
 
 """
 import pandas as pd
-from load_my_lecture import get_my_lecture
-from tools import contrast_old_and_new as con
-from tools import Prerequisites_dictionary as pre
+import os
+from src import contrast_old_and_new as con
+from src import Prerequisites_dictionary as pre
+
+def get_my_lecture(file_name="learned.xlsx", type="all"):
+    """
+    들었던 강의 리스트
+    type=(str) (default)all : Dataframe , list : List of Lecture Code
+    return = dataframe
+    """
+    file_name = "./media/result/" + file_name
+    if(os.path.isfile(file_name) == False):
+        return []
+    else:
+        df =  pd.read_excel(file_name,usecols=[i for i in range(0,9)],dtype=str)
+        df.columns = ["구분", "영역", "세부영역", "수강년도", "학기", "과목코드", "과목명", "학점", "이수구분"]
+        
+        df = df.sort_values(["과목코드"]).dropna(subset="과목코드").reset_index(drop=True)
+        if(type == "all"):
+            return df
+        else:
+            return df["과목코드"].tolist()
+
 
 all_ON_lecture = con.Old_and_new().get_all_lecture()
-all_lecture = pd.read_excel("./source/all_lecture.xlsx",dtype = str)
-lecture_in_2022 = pd.read_excel("./source/2022lecture.xlsx", dtype = str)
+all_lecture = pd.read_excel("./data/all_lecture.xlsx",dtype = str)
+lecture_in_2022 = pd.read_excel("./data/2022lecture.xlsx", dtype = str)
 prerequisites = pre.Prerequisites().subject_pair_dic
 class MyInfo:
     """Input my lecture info, automatically calculate score
