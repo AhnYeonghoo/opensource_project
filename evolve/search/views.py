@@ -113,7 +113,15 @@ def get_my_lecture(request):
     # else:
     #     return df["과목코드"].tolist()
     c = load_data.MyInfo()
-    context = {"my_field":c.my_ge.field}
+    l = []
+    for key, val in c.my_ge.field.items():
+        a = {"field":key, "my_score":val, "min_score":c.min_ge.field[key]}
+        l.append(a)
+    
+    context = {
+        "my_field":c.my_ge.field.items(),
+        "sd":l
+    }
     #c.print_my_lec()
     return render(request, "result-user-lecture.html", context)
     

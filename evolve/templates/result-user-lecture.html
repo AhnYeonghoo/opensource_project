@@ -2,8 +2,10 @@
 {% block content %}
 <h1 style="color:blue">전공 및 교양 현황</h1>
 <br>
-{% for key in my_field%}
-    <h2>{{key}} ( / )</h2>
+
+{% for sco in sd%}
+    
+    <h2>{{sco.field}} ({{sco.my_score}} / {{sco.min_score}})</h2>
 {% endfor %}
 
 </form>
