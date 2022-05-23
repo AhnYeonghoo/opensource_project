@@ -11,6 +11,11 @@
             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{lec.isClear}}&nbsp;{{lec.name}}</p>
         {% endfor%}
     {% endfor %}
+    {% if sco.field == "전공선택" %}
+        {% for lec in major%}
+            <p>{{lec.isClear}}{{lec.name}}{{lec.changed}}{{lec.prerequire}}{{lec.score}}</p>
+        {% endfor %}
+    {% endif %}
 {% endfor %}
 
 </form>
