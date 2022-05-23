@@ -83,29 +83,42 @@ class MyInfo:
         return self.my_ge
 
     def print_need_lec(self):
+        l = []
         require_major_codes = self.min_ge.essential_code["전공필수"]
         my_major = self.my_lecture[self.my_lecture["영역"].isin(["전공"])]
         for lec_code in require_major_codes:
+            a = {"isClear":"","name":"","changed":"","prerequire":"","score":""}
             flag = False
             idx = all_lecture['과목코드'].tolist().index(lec_code)
-            print(end="\t")
+            #print(end="\t")
             if lec_code in my_major["과목코드"].tolist():
-                print("(수강함)",end="")
+                #print("(수강함)",end="")
+                a["isClear"]="(이  수)"
                 flag = True
-            print(all_lecture['과목명'].iloc[idx], end="")
+            #print(all_lecture['과목명'].iloc[idx], end="")
+            a["name"]=all_lecture['과목명'].iloc[idx]
             for onn_lec in all_ON_lecture:
                 if flag is False:
                     if lec_code == onn_lec[0]:
                         if onn_lec[4] == "동일":
-                            print("->", onn_lec[3], "(변경)",end="")
+                            #print("->", onn_lec[3], "(변경)",end="")
+                            a["changed"]="(변경)"
                         elif onn_lec[4] == "삭제":
-                            print("(폐강)",end="")
+                            #print("(폐강)",end="")
+                            a["changed"]="(삭제)"
+            
             
             if lec_code in prerequisites and self.year < 2020:
                 idx2 = all_lecture['과목코드'].tolist().index(prerequisites[lec_code])
-                print("   ", all_lecture['과목명'].iloc[idx2]," (필요)",end="")
-            print(all_lecture['학점'].iloc[idx],end="")
-            print()
+                #print("   ", all_lecture['과목명'].iloc[idx2]," (필요)",end="")
+                a["prerequire"]=all_lecture['과목명'].iloc[idx2] + "(필요)"
+
+            #print(all_lecture['학점'].iloc[idx],end="")
+            #print()
+            a["score"]=all_lecture['학점'].iloc[idx]
+            l.append(a)
+        return l
+        
 
     def is_specific(self, field):
         return field in self.my_ge.sub_field.keys()
@@ -170,6 +183,7 @@ class MyInfo:
                 print(f"\t{my_ge_lec_list[i][1]}")
 
     def print_ge(self, specific_field):         # 세부영역 이수 여부 출력
+        lec_info = []
         my_learned_list = pd.DataFrame(self.my_lecture, columns= \
                                         ['영역','세부영역','교과목번호','교과목명','이수구분']).values.tolist()
         df_all_list = pd.DataFrame(lecture_in_2022, columns = \
@@ -182,9 +196,14 @@ class MyInfo:
                     if df_all_list[i][1] == my_learned_list[j][2]:
                         flag=1
                 if flag == 1:
-                    print(f"\t\t(이  수) {df_all_list[i][2]}")
+                    #print(f"\t\t(이  수) {df_all_list[i][2]}")
+                    a={"isClear":"(이  수)", "name":df_all_list[i][2]}
                 else:
-                    print(f"\t\t(미이수) {df_all_list[i][2]}")
+                    #print(f"\t\t(미이수) {df_all_list[i][2]}")
+                    a={"isClear":"(미이수)", "name":df_all_list[i][2]}
+                lec_info.append(a)
+        
+        return lec_info
 
 class LecField:
     def __init__(self):

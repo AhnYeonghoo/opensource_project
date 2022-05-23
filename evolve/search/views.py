@@ -99,35 +99,30 @@ def contact(request):
     
     return render(request, "contact.html")
 
-def get_my_lecture(request):
-    
-    # file_name= models.Document.title
-    # file = models.Document.uploaded_file
-    
-    # df = pd.read_excel(file, usecols=[i for i in range(0, 9)], dtype=str)
-    # df.columns = ["구분", "영역", "세부영역", "수강년도", "학기", "과목코드", "과목명", "학점", "이수구분"]
-        
-    # df = df.sort_values(["과목코드"]).dropna(subset="과목코드").reset_index(drop=True)
-    # if(type == "all"):
-    #     return df
-    # else:
-    #     return df["과목코드"].tolist()
+def calculator(request):
     c = load_data.MyInfo()
     l = []
+    r = []
     for field, my_score in c.my_ge.field.items():
         a = {"field":field, "my_score":my_score, "min_score":c.min_ge.field[field], "sub_field":[]}
         if c.is_specific(field):
             for sub_field, m_score in c.my_ge.sub_field[field].items():
-                b = {"sub_field":sub_field,"my_score":m_score, "min_score":c.min_ge.sub_field[field][sub_field]}
+                b = {"sub_field":sub_field,"my_score":m_score, "min_score":c.min_ge.sub_field[field][sub_field], "lec_info":[]}
+                if m_score < b["min_score"]:
+                    b["lec_info"]=c.print_ge(sub_field)
                 a["sub_field"].append(b)
+        elif field == "전공필수":
+            r=c.print_need_lec()
+        elif field == "전공선택":
+            c.print_major_selection()
         l.append(a)
     
     context = {
-        "my_field":c.my_ge.field.items(),
-        "sd":l
+        "sd":l,
+        "major":r,
     }
     #c.print_my_lec()
-    return render(request, "result-user-lecture.html", context)
+    return render(request, "calculator.html", context)
     
 
 def read_user_lecture(request):
@@ -143,17 +138,8 @@ def read_user_lecture(request):
     
     return (request, "result-user-lecture.html", context)
         
-    
+def get_my_lecture(request):
 
-def calculator(request):
-    
-    if request.POST.get("calculator"):
-        document = models.Document.objects.all()
-        context = {"doc": document}
-    else:
-        document = models.Document.objects.all()
-        context = {"doc": document}
-        
-    
-    return (request, "calculator.html", context)
+    return render(request, "upload-file.html")
+
 
