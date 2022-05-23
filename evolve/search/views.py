@@ -106,12 +106,13 @@ def calculator(request):
         a = {"field":field, "my_score":my_score, "min_score":c.min_ge.field[field], "sub_field":[]}
         if c.is_specific(field):
             for sub_field, m_score in c.my_ge.sub_field[field].items():
-                b = {"sub_field":sub_field,"my_score":m_score, "min_score":c.min_ge.sub_field[field][sub_field]}
+                b = {"sub_field":sub_field,"my_score":m_score, "min_score":c.min_ge.sub_field[field][sub_field], "lec_info":[]}
+                if m_score < b["min_score"]:
+                    b["lec_info"]=c.print_ge(sub_field)
                 a["sub_field"].append(b)
         l.append(a)
     
     context = {
-        "my_field":c.my_ge.field.items(),
         "sd":l
     }
     #c.print_my_lec()

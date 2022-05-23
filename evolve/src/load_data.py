@@ -170,6 +170,7 @@ class MyInfo:
                 print(f"\t{my_ge_lec_list[i][1]}")
 
     def print_ge(self, specific_field):         # 세부영역 이수 여부 출력
+        lec_info = []
         my_learned_list = pd.DataFrame(self.my_lecture, columns= \
                                         ['영역','세부영역','교과목번호','교과목명','이수구분']).values.tolist()
         df_all_list = pd.DataFrame(lecture_in_2022, columns = \
@@ -183,8 +184,13 @@ class MyInfo:
                         flag=1
                 if flag == 1:
                     print(f"\t\t(이  수) {df_all_list[i][2]}")
+                    a={"isClear":"(이  수)", "name":df_all_list[i][2]}
                 else:
                     print(f"\t\t(미이수) {df_all_list[i][2]}")
+                    a={"isClear":"(미이수)", "name":df_all_list[i][2]}
+                lec_info.append(a)
+        
+        return lec_info
 
 class LecField:
     def __init__(self):
