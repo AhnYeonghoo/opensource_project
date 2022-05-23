@@ -99,19 +99,7 @@ def contact(request):
     
     return render(request, "contact.html")
 
-def get_my_lecture(request):
-    
-    # file_name= models.Document.title
-    # file = models.Document.uploaded_file
-    
-    # df = pd.read_excel(file, usecols=[i for i in range(0, 9)], dtype=str)
-    # df.columns = ["구분", "영역", "세부영역", "수강년도", "학기", "과목코드", "과목명", "학점", "이수구분"]
-        
-    # df = df.sort_values(["과목코드"]).dropna(subset="과목코드").reset_index(drop=True)
-    # if(type == "all"):
-    #     return df
-    # else:
-    #     return df["과목코드"].tolist()
+def calculator(request):
     c = load_data.MyInfo()
     l = []
     for field, my_score in c.my_ge.field.items():
@@ -127,7 +115,7 @@ def get_my_lecture(request):
         "sd":l
     }
     #c.print_my_lec()
-    return render(request, "result-user-lecture.html", context)
+    return render(request, "calculator.html", context)
     
 
 def read_user_lecture(request):
@@ -143,8 +131,11 @@ def read_user_lecture(request):
     
     return (request, "result-user-lecture.html", context)
         
-    
+def get_my_lecture(request):
 
+    return render(request, "upload-file.html")
+
+<<<<<<< HEAD
 def calculator(request):
     
     if request.POST.get("calculator"):
@@ -156,3 +147,6 @@ def calculator(request):
         
     
     return (request, "calculator.html", context)
+=======
+
+>>>>>>> 8a6a5bc (modify : 경로 수정)
