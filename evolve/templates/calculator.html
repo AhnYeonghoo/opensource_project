@@ -7,6 +7,9 @@
     <h2>{{sco.field}} ({{sco.my_score}} / {{sco.min_score}})</h2>
     {% for sub in sco.sub_field%}
         <h3> &nbsp;&nbsp;&nbsp;&nbsp;{{sub.sub_field}} ({{sub.my_score}} / {{sub.min_score}})</h3>
+        {% for lec in sub.lec_info%}
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{lec.isClear}}&nbsp;{{lec.name}}</p>
+        {% endfor%}
     {% endfor %}
 {% endfor %}
 
