@@ -102,6 +102,7 @@ def contact(request):
 def calculator(request):
     c = load_data.MyInfo()
     l = []
+    r = []
     for field, my_score in c.my_ge.field.items():
         a = {"field":field, "my_score":my_score, "min_score":c.min_ge.field[field], "sub_field":[]}
         if c.is_specific(field):
@@ -110,10 +111,15 @@ def calculator(request):
                 if m_score < b["min_score"]:
                     b["lec_info"]=c.print_ge(sub_field)
                 a["sub_field"].append(b)
+        elif field == "전공필수":
+            r=c.print_need_lec()
+        elif field == "전공선택":
+            c.print_major_selection()
         l.append(a)
     
     context = {
-        "sd":l
+        "sd":l,
+        "major":r,
     }
     #c.print_my_lec()
     return render(request, "calculator.html", context)
