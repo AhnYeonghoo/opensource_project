@@ -183,6 +183,17 @@ class MyInfo:
                 print(f"\t{my_ge_lec_list[i][1]}")
 
     def print_ge(self, specific_field):         # 세부영역 이수 여부 출력
+        my_learned_list = pd.DataFrame(self.my_lecture, columns= \
+                                        ['영역','세부영역','교과목번호','교과목명','이수구분']).values.tolist()
+        df_all_list = pd.DataFrame(lecture_in_2022, columns = \
+                                        ['분야', '교과목번호', '교과목명']).values.tolist()
+
+        for lec in df_all_list:
+            if lec[0] == specific_field:
+                if lec[1] in my_learned_list:
+                    print(f"\t\t(이  수) {lec[2]}")
+                else:
+                    print(f"\t\t(미이수) {lec[2]}")
 
 class LecField:
     def __init__(self):
