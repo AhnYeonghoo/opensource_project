@@ -141,15 +141,3 @@ def read_user_lecture(request):
 def get_my_lecture(request):
 
     return render(request, "upload-file.html")
-
-def calculator(request):
-    
-    if request.POST.get("calculator"):
-        document = models.Document.objects.all()
-        context = {"doc": document}
-    else:
-        document = models.Document.objects.all()
-        context = {"doc": document}
-        
-    
-    return (request, "calculator.html", context)
