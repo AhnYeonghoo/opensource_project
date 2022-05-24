@@ -184,22 +184,6 @@ class MyInfo:
 
     def print_ge(self, specific_field):         # 세부영역 이수 여부 출력
 
-        for i in range(len(df_all_list)):
-            if df_all_list[i][0] == specific_field:
-                flag=0
-                for j in range(len(my_learned_list)):
-                    if df_all_list[i][1] == my_learned_list[j][2]:
-                        flag=1
-                if flag == 1:
-                    #print(f"\t\t(이  수) {df_all_list[i][2]}")
-                    a={"isClear":"(이  수)", "name":df_all_list[i][2]}
-                else:
-                    #print(f"\t\t(미이수) {df_all_list[i][2]}")
-                    a={"isClear":"(미이수)", "name":df_all_list[i][2]}
-                lec_info.append(a)
-        
-        return lec_info
-
 class LecField:
     def __init__(self):
         self.field = {"개신기초교양":0, "일반교양":0, "확대교양":0, "자연이공계기초과학":0, "전공필수":0, "전공선택":0}
