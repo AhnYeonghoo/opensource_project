@@ -6,18 +6,20 @@
 {% for sco in sd%}
     <h2>{{sco.field}} ({{sco.my_score}} / {{sco.min_score}})</h2>
     {% for sub in sco.sub_field%}
-        <h3> &nbsp;&nbsp;&nbsp;&nbsp;{{sub.sub_field}} ({{sub.my_score}} / {{sub.min_score}})</h3>
+        <h3> {{sub.sub_field}} ({{sub.my_score}} / {{sub.min_score}})</h3>
         {% for lec in sub.lec_info%}
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{lec.isClear}}&nbsp;{{lec.name}}</p>
+            <p>{{lec.isClear}}{{lec.lecture_name}}{{lec.grade}}</p>
         {% endfor%}
     {% endfor %}
     {% if sco.field == "전공필수" %}
-        {% for lec in major%}
-            <p>{{lec.isClear}}{{lec.name}}{{lec.changed}}{{lec.prerequire}}{{lec.score}}</p>
+        {% for lec2 in major%}
+            <p>{{lec2.isClear}}{{lec2.name}}{{lec2.changed}}{{lec2.prerequire}}{{lec2.score}}</p>
         {% endfor %}
     {% endif %}
     {% if sco.field == "전공선택"%}
-
+        {% for lec in selection%}
+            <p>{{lec.isClear}} {{lec.lecture_name}} {{lec.grade}}</p>
+        {% endfor %}
     {% endif %}
 {% endfor %}
 
