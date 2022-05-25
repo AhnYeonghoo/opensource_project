@@ -185,8 +185,9 @@ class MyInfo:
             if my_ge_lec[i][0] == specific_field:
                 #print(f"\t{my_ge_lec[i][1]}")
                 my_ge_lec_info["lecture"] = my_ge_lec[i][1]
-                
-        return my_ge_lec_info
+            my_ge_lec_list.append(my_ge_lec_info)
+
+        return my_ge_lec_list
 
     def print_ge(self, specific_field):         # 세부영역 이수 여부 출력
         my_learned_list = pd.DataFrame(self.my_lecture, columns= \
