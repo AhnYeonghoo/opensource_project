@@ -28,6 +28,11 @@
                         <a class="nav-link" href="{% url 'authenticated:login' %}">Login</a>
                         {% endif %}
                     </div>
+                    <div>
+                        {% if not user.is_authenticated %}
+                        <a class="nav-link" href="{% url 'authenticated:signup' %}">Signup</a>
+                        {% endif %}
+                    </div>
                     <li>
                         <a href="{% url  'search:index' %}" class="nav-link px-2 text-white">Home</a>
                     </li>
