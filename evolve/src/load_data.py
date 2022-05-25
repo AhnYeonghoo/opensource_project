@@ -186,14 +186,23 @@ class MyInfo:
         my_learned_list = pd.DataFrame(self.my_lecture, columns= \
                                         ['영역','세부영역','교과목번호','교과목명','이수구분']).values.tolist()
         df_all_list = pd.DataFrame(lecture_in_2022, columns = \
-                                        ['분야', '교과목번호', '교과목명']).values.tolist()
-
+                                        ['분야', '교과목번호', '교과목명', "학점"]).values.tolist()
+        lec_list=[]
         for lec in df_all_list:
+            lec_info = {"isClear":"", "lecture_name":"", "grade":""}
             if lec[0] == specific_field:
                 if lec[1] in my_learned_list:
-                    print(f"\t\t(이  수) {lec[2]}")
+                    #print(f"\t\t(이  수) {lec[2]} {lec[3]}")
+                    lec_info["isClear"]="(이  수)"
                 else:
-                    print(f"\t\t(미이수) {lec[2]}")
+                    #print(f"\t\t(미이수) {lec[2]} {lec[3]}")
+                    lec_info["isClear"]="(미이수)"
+                lec_info["lecture_name"] = lec[2]
+                lec_info["grade"] = lec[3]
+            
+            lec_list.append(lec_info)
+        
+        return lec_list
 
 class LecField:
     def __init__(self):
