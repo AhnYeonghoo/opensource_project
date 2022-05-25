@@ -146,12 +146,13 @@ class MyInfo:
                 print("\t(미이수)", lec[4], lec[5])
         else:
             my_learned_code=self.my_lecture["과목코드"].tolist()
-            df_all = pd.DataFrame(lecture_in_2022, columns = ['분야', '교과목번호', '교과목명', '학점'])
-            df_all_list = df_all.values.tolist()
+            df_all_list = pd.DataFrame(lecture_in_2022, columns \
+                                            = ['분야', '교과목번호', '교과목명', '학점']).tolist()
+            lec_list=[]
 
             for lec in df_all_list:
+                lec_info = {"type":"", "lecture_code":"", "lecture_name":"", "grade": ""}
                 if lec[0] == "전공선택":
-
                     if lec[1] in my_learned_code:
                         print(f"\t(이  수) {lec[2]} {lec[3]}")
                     else:
