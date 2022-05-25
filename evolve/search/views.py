@@ -8,7 +8,7 @@ import pandas as pd
 import os
 from src import load_data
 from django.contrib.auth.decorators import login_required
-
+URL_LOGIN = '/authenticated/login'
 # Create your views here.
 
 def index(request):
@@ -19,7 +19,7 @@ def index(request):
     
     return render(request, "index.html")
 
-@login_required
+@login_required(login_url=URL_LOGIN)
 def upload_file(request):
     
     '''
@@ -56,7 +56,7 @@ def upload_file(request):
         })
         
         
-@login_required
+@login_required(login_url=URL_LOGIN)
 def recomand(request):
     
     '''
@@ -88,12 +88,12 @@ def recomand(request):
         context = {"app": app_list}
         return render(request, "app_list.html", context)
     
-@login_required
+@login_required(login_url=URL_LOGIN)
 def goto_recomand(request):
     
     return render(request, "recomand.html")
 
-@login_required
+@login_required(login_url=URL_LOGIN)
 def goto_upload_file(request):
     
     return render(request, "upload-file.html")
@@ -126,8 +126,8 @@ def calculator(request):
     }
     #c.print_my_lec()
     return render(request, "calculator.html", context)
-    
-@login_required
+
+@login_required(login_url=URL_LOGIN)
 def read_user_lecture(request):
     
     file = pd.read_csv("../media/result/learned.csv", dtype="str")
@@ -141,7 +141,7 @@ def read_user_lecture(request):
     
     return (request, "result-user-lecture.html", context)
         
-@login_required
+@login_required(login_url=URL_LOGIN)
 def get_my_lecture(request):
 
     return render(request, "upload-file.html")
