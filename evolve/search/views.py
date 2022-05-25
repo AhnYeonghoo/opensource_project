@@ -7,6 +7,7 @@ from openpyxl import load_workbook
 import pandas as pd
 import os
 from src import load_data
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -18,6 +19,7 @@ def index(request):
     
     return render(request, "index.html")
 
+@login_required
 def upload_file(request):
     
     '''
@@ -54,7 +56,7 @@ def upload_file(request):
         })
         
         
-
+@login_required
 def recomand(request):
     
     '''
@@ -86,11 +88,12 @@ def recomand(request):
         context = {"app": app_list}
         return render(request, "app_list.html", context)
     
-    
+@login_required
 def goto_recomand(request):
     
     return render(request, "recomand.html")
 
+@login_required
 def goto_upload_file(request):
     
     return render(request, "upload-file.html")
@@ -124,7 +127,7 @@ def calculator(request):
     #c.print_my_lec()
     return render(request, "calculator.html", context)
     
-
+@login_required
 def read_user_lecture(request):
     
     file = pd.read_csv("../media/result/learned.csv", dtype="str")
@@ -138,6 +141,7 @@ def read_user_lecture(request):
     
     return (request, "result-user-lecture.html", context)
         
+@login_required
 def get_my_lecture(request):
 
     return render(request, "upload-file.html")
