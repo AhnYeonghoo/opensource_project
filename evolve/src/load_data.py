@@ -175,12 +175,18 @@ class MyInfo:
             elif field == "전공선택":
                 self.print_major_selection()
 
-    def print_my_ge_lec(self, specific_field):
-        my_ge_lec_list = pd.DataFrame(lecture_in_2022, columns = \
+    def print_my_ge_lec(self, specific_field):      # 분야에 맞는 교과목명 출력
+        my_ge_lec = pd.DataFrame(lecture_in_2022, columns = \
                                             ['분야', '교과목명']).values.tolist()
-        for i in len(my_ge_lec_list):
-            if my_ge_lec_list[i][0] == specific_field:
-                print(f"\t{my_ge_lec_list[i][1]}")
+        my_ge_lec_list=[]
+
+        for i in len(my_ge_lec):
+            my_ge_lec_info={"lecture_name":""}
+            if my_ge_lec[i][0] == specific_field:
+                #print(f"\t{my_ge_lec[i][1]}")
+                my_ge_lec_info["lecture"] = my_ge_lec[i][1]
+                
+        return my_ge_lec_info
 
     def print_ge(self, specific_field):         # 세부영역 이수 여부 출력
         my_learned_list = pd.DataFrame(self.my_lecture, columns= \
