@@ -141,5 +141,3 @@ def read_user_lecture(request):
 def get_my_lecture(request):
 
     return render(request, "upload-file.html")
-
-
