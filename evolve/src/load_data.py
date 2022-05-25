@@ -151,14 +151,21 @@ class MyInfo:
             lec_list=[]
 
             for lec in df_all_list:
-                lec_info = {"type":"", "lecture_code":"", "lecture_name":"", "grade": ""}
+                lec_info = {"isClear":"", "lecture_name":"", "grade": ""}
                 if lec[0] == "전공선택":
                     if lec[1] in my_learned_code:
-                        print(f"\t(이  수) {lec[2]} {lec[3]}")
+                        #print(f"\t(이  수) {lec[2]} {lec[3]}")
+                        lec_info["isClear"]="(이  수)"
                     else:
-                        print(f"\t(미이수) {lec[2]} {lec[3]}")
+                        #print(f"\t(미이수) {lec[2]} {lec[3]}")
+                        lec_info["isClear"]="(미이수)"
+                    lec_info["lecture_name"]=lec[2]
+                    lec_info["grade"]=lec[3]
+                
+                lec_list.append(lec_info)
                     # for j in len(my_learned_code):
                     #     if lec[0][i][1] == my_learned_code[j]:
+            return lec_list
 
     def print_my_lec(self):
         for field, my_score in self.my_ge.field.items():
