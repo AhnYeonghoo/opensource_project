@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 style="color:blue"> 계산하고자 하는 학점이수목록 엑셀 파일을 업로드 해주세요. </h1>
+<br>
+<form action="{% url 'search:upload_file' %}" method="POST" enctype="multipart/form-data">
+    <input type="text" name="title" placeholder="학번을 입력하세요.">
+    <input type="file" name="uploaded_file">
+    {% csrf_token %}
+    <input type="submit" value="Upload" onclick="upload_file()">
+</form>
+<form action="{% url 'search:calculator' %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" name="calculator" value="계산!">
+</form>
+
+<form action="{% url 'search:read_user_lecture' %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" name="read_user_lecture" value="읽어온 데이터">
+</form>
+<form action="{% url 'search:get_my_lecture' %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" name="my_lec" value="내 강의">
+</form>
+{% endblock %}

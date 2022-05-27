@@ -1,0 +1,15 @@
+[Language]
+python >= 3.10.1
+
+[Framework]
+django >= 3.1.3
+
+[Library]
+Pandas >= 1.4.0
+numpy >= 1.22.2
+
+[DatabaseSystem]
+Sqlite >= 3.x
+
+
+

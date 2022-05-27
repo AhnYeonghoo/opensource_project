@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Castoro&family=Noto+Sans+KR:wght@500&family=Song+Myung&display=swap");
+* {
+  background-color: #e8f0f2;
+}
+header {
+  text-align: center;
+  border: 10px solid white;
+  box-sizing: content-box;
+  width: 500px;
+  position: relative;
+  margin-left: 370px;
+  font-family: "Castoro", serif;
+  box-shadow: 3px 3px 3px 3px white;
+}
+dl {
+  margin-left: 50px;
+  font-family: "Noto Sans KR", sans-serif;
+}
+h1 {
+  color: gray;
+  font-weight: 600;
+  font-size: 70px;
+  text-shadow: darkolivegreen 1px 0 10px;
+}
+img {
+  float: left;
+  margin-right: 40px;
+}
+dd {
+  margin: 0;
+  font-size: 20px;
+}
+
+dt {
+  font-size: 30px;
+  font-weight: 600;
+  clear: both;
+  padding-right: 20px;
+}
+div {
+  float: center;
+}
+p {
+  font-size: 20px;
+}
+ul li {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
