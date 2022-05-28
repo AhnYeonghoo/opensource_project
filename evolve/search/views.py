@@ -143,7 +143,12 @@ def read_user_lecture(request):
     
     return (request, "result-user-lecture.html", context)
         
+
 @login_required(login_url=URL_LOGIN)
+def get_my_lecture(request):
+
+    return render(request, "upload-file.html")
+
 def get_my_lecture(request):
 
     return render(request, "upload-file.html")

@@ -19,7 +19,7 @@
 
 - <span style="color:aqua">1. 원활한 졸업을 위한 학점 계산 및 강의 추천</span>
 - <span style="color:aqua">2. 자신의 관심 분야에 맞는 강의 추천(과목 선택의 다양성 제공)</span>
-- <span style="color:aqua">복학생의 교과목 대조의 어려움 해소</span>
+- <span style="color:aqua">3. 복학생의 교과목 대조의 어려움 해소</span>
 
 <br >
 <br >

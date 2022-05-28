@@ -3,7 +3,7 @@
 <h1 style="color:blue">전공 및 교양 현황</h1>
 <br>
 
-{% for sco in sd%}
+{% for sco in sd %}
     <h2>{{sco.field}} ({{sco.my_score}} / {{sco.min_score}})</h2>
     {% for sub in sco.sub_field%}
         <h3> {{sub.sub_field}} ({{sub.my_score}} / {{sub.min_score}})</h3>
@@ -20,7 +20,9 @@
         {% for lec in selection%}
             <p>{{lec.isClear}} {{lec.lecture_name}} {{lec.grade}}</p>
         {% endfor %}
+
     {% endif %}
+    
 {% endfor %}
 
 </form>
