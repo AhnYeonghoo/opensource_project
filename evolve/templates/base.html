@@ -1,5 +1,24 @@
 <!DOCTYPE html>
 {% load static %}
+
+    {% comment %} <body>
+        <div>
+            <h1><a href="/">PAB</a></h1>
+            <h1><a font-size:30px>
+            <h1><a>
+        </div>
+
+        {% for post in posts %}
+            <div>
+                <p>published: {{ post.published_date }}</p>
+                <h1><a href="">{{ post.title }}</a></h1>
+                <p>{{ post.text|linebreaksbr }}</p>
+            </div>
+        {% endfor %}
+    </body> {% endcomment %}
+
+
+
 <html lang="en">
 
 <head>
@@ -10,19 +29,23 @@
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %} ">
     <script src="{% static 'index.js' %}"></script>
     <script src="{% static 'slideshow.js' %}"></script>
-    <title>{% block title %} CBNU {% endblock title %}</title>
+    <title>{% block title %}PAB {% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    
 </head>
 
 
 <body>
-
+    
     {% block header %}
     <main>
         <header class="p-3 bg-dark text-white">
-            <div>
+           
+                <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+                <a style="font-size:20px" href="{% url 'search:index' %}">PAB</a>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <div class="account" style="float:left; display:flex; justipy-content: space-between;">
-                        <li style="float:left;">
+                    
+                        <li style="">
                             {% if user.is_authenticated %}
                             <a class="nav-link" href="{% url 'authenticated:logout' %}">{{ user.username }}(로그아웃)</a>
                             {% else %}
@@ -35,9 +58,7 @@
                             {% endif %}
                         </li>
                     </div>
-                    <li>
-                        <a href="{% url  'search:index' %}" class="nav-link px-2 text-white">Home</a>
-                    </li>
+                    
                     <li>
                         <a href="{% url 'search:goto_upload_file' %}" class="nav-link px-2 text-white">학점계산기</a>
                     </li>
@@ -47,9 +68,9 @@
                     <li>
                         <a href="{% url 'search:contact' %}" class="nav-link px-2 text-white">Contact</a>
                     </li>
-                </ul>
-            </div>
-            </div>
+                </ul>   
+           
+            
         </header>
 
 
