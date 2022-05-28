@@ -11,15 +11,26 @@
     {% csrf_token %}
     <input type="submit" value="Upload" onclick="upload_file()">
 </form>
+<br>
+
 <form action="{% url 'search:calculator' %}" method="POST">
     {% csrf_token %}
     <input type="submit" name="calculator" value="계산!">
 </form>
 
-<form action="{% url 'search:read_user_lecture' %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" name="read_user_lecture" value="읽어온 데이터">
-</form>
+<br>
+
+<div>
+    <br>
+    <form action="{% url 'search:read_user_lecture' %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" name="read_user_lecture" value="읽어온 데이터">
+    </form>
+</div>
+
+<br>
+<br>
+
 <form action="{% url 'search:get_my_lecture' %}" method="POST">
     {% csrf_token %}
     <input type="submit" name="my_lec" value="내 강의">
