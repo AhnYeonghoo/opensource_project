@@ -27,11 +27,9 @@ def upload_file(request):
     '''
     
     if request.method == "POST":
-        title = request.POST.get('title')
         uploaded_file = request.FILES['uploaded_file']
         
         document = models.Document(
-            title = title,
             uploaded_file = uploaded_file
         )
         document.save()
@@ -149,24 +147,18 @@ def read_user_lecture(request):
     
     return (request, "result-user-lecture.html", context)
         
-
 @login_required(login_url=URL_LOGIN)
 def get_my_lecture(request):
 
     return render(request, "upload-file.html")
 
-def get_my_lecture(request):
 
-    return render(request, "upload-file.html")
+# def get_year(request):
+#     year = request.POST.get("year")
+#     context = {"year": year}
+#     return redirect(request, "upload-file", context)
 
-
-def calculator(request):
-    
-    if request.POST.get("calculator"):
-        document = models.Document.objects.all()
-        context = {"doc": document}
-    else:
-        document = models.Document.objects.all()
-        context = {"doc": document}
-        
-    return (request, "calculator.html", context)
+# def get_filename(request):
+#     filename = request.POST.get("file_name")
+#     context = {"filename" : filename}
+#     return redirect(request, "upload-file", context)
