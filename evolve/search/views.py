@@ -101,6 +101,9 @@ def contact(request):
     return render(request, "contact.html")
 
 def calculator(request):
+    """
+    입학년도와 파일이름을 입력받아 해당 내용들을 calculator.html로 보내줌.
+    """
     year = request.POST.get("year")
     file_name = request.POST.get("file_name")
     
@@ -109,7 +112,6 @@ def calculator(request):
     c = load_data.MyInfo(int(year), file_name)
     l = []
     r = []
-    
     
     for field, my_score in c.my_ge.field.items():
         a = {"field":field, "my_score":my_score, "min_score":c.min_ge.field[field], "sub_field":[]}
