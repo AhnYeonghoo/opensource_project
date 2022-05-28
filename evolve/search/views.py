@@ -103,6 +103,12 @@ def contact(request):
     return render(request, "contact.html")
 
 def calculator(request):
+    """
+    입학년도와 파일이름을 입력받아 해당 내용들을 calculator.html로 보내줌.
+    """
+    year = request.POST.get("year")
+    file_name = request.POST.get("file_name")
+
     my_info = load_data.MyInfo()
     element = []
     major = []
@@ -128,31 +134,6 @@ def calculator(request):
     }
     #c.print_my_lec()
     return render(request, "calculator.html", context)
-    c = load_data.MyInfo()
-    l = []
-    r = []
-    for field, my_score in c.my_ge.field.items():
-        a = {"field":field, "my_score":my_score, "min_score":c.min_ge.field[field], "sub_field":[]}
-        if c.is_specific(field):
-            for sub_field, m_score in c.my_ge.sub_field[field].items():
-                b = {"sub_field":sub_field,"my_score":m_score, "min_score":c.min_ge.sub_field[field][sub_field], "lec_info":[]}
-                if m_score < b["min_score"]:
-                    b["lec_info"]=c.print_ge(sub_field)
-                a["sub_field"].append(b)
-        elif field == "전공필수":
-            r=c.print_need_lec()
-        elif field == "전공선택":
-            c.print_major_selection()
-        l.append(a)
-    
-    context = {
-        "sd":l,
-        "major":r,
-    }
-    #c.print_my_lec()
-    return render(request, "calculator.html", context)
-    
-
 
 @login_required(login_url=URL_LOGIN)
 def read_user_lecture(request):
