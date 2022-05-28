@@ -5,3 +5,4 @@ test.ipynb
 media/result/
 .png
 .jpg
+db.sqlite3
