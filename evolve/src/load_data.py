@@ -146,26 +146,18 @@ class MyInfo:
                 print("\t(미이수)", lec[4], lec[5])
         else:
             my_learned_code=self.my_lecture["과목코드"].tolist()
-            df_all_list = pd.DataFrame(lecture_in_2022, columns \
-                                            = ['분야', '교과목번호', '교과목명', '학점']).tolist()
-            lec_list=[]
+            df_all = pd.DataFrame(lecture_in_2022, columns = ['분야', '교과목번호', '교과목명', '학점'])
+            df_all_list = df_all.values.tolist()
 
             for lec in df_all_list:
-                lec_info = {"isClear":"", "lecture_name":"", "grade": ""}
                 if lec[0] == "전공선택":
+
                     if lec[1] in my_learned_code:
-                        #print(f"\t(이  수) {lec[2]} {lec[3]}")
-                        lec_info["isClear"]="(이  수)"
+                        print(f"\t(이  수) {lec[2]} {lec[3]}")
                     else:
-                        #print(f"\t(미이수) {lec[2]} {lec[3]}")
-                        lec_info["isClear"]="(미이수)"
-                    lec_info["lecture_name"]=lec[2]
-                    lec_info["grade"]=lec[3]
-                
-                lec_list.append(lec_info)
+                        print(f"\t(미이수) {lec[2]} {lec[3]}")
                     # for j in len(my_learned_code):
                     #     if lec[0][i][1] == my_learned_code[j]:
-            return lec_list
 
     def print_my_lec(self):
         for field, my_score in self.my_ge.field.items():
@@ -183,41 +175,35 @@ class MyInfo:
             elif field == "전공선택":
                 self.print_major_selection()
 
-    def print_my_ge_lec(self, specific_field):      # 분야에 맞는 교과목명 출력
-        my_ge_lec = pd.DataFrame(lecture_in_2022, columns = \
+    def print_my_ge_lec(self, specific_field):
+        my_ge_lec_list = pd.DataFrame(lecture_in_2022, columns = \
                                             ['분야', '교과목명']).values.tolist()
-        my_ge_lec_list=[]
-
-        for i in len(my_ge_lec):
-            my_ge_lec_info={"lecture_name":""}
-            if my_ge_lec[i][0] == specific_field:
-                #print(f"\t{my_ge_lec[i][1]}")
-                my_ge_lec_info["lecture"] = my_ge_lec[i][1]
-            my_ge_lec_list.append(my_ge_lec_info)
-
-        return my_ge_lec_list
+        for i in len(my_ge_lec_list):
+            if my_ge_lec_list[i][0] == specific_field:
+                print(f"\t{my_ge_lec_list[i][1]}")
 
     def print_ge(self, specific_field):         # 세부영역 이수 여부 출력
+        lec_info = []
         my_learned_list = pd.DataFrame(self.my_lecture, columns= \
                                         ['영역','세부영역','교과목번호','교과목명','이수구분']).values.tolist()
         df_all_list = pd.DataFrame(lecture_in_2022, columns = \
-                                        ['분야', '교과목번호', '교과목명', "학점"]).values.tolist()
-        lec_list=[]
-        for lec in df_all_list:
-            lec_info = {"isClear":"", "lecture_name":"", "grade":""}
-            if lec[0] == specific_field:
-                if lec[1] in my_learned_list:
-                    #print(f"\t\t(이  수) {lec[2]} {lec[3]}")
-                    lec_info["isClear"]="(이  수)"
+                                        ['분야', '교과목번호', '교과목명']).values.tolist()
+
+        for i in range(len(df_all_list)):
+            if df_all_list[i][0] == specific_field:
+                flag=0
+                for j in range(len(my_learned_list)):
+                    if df_all_list[i][1] == my_learned_list[j][2]:
+                        flag=1
+                if flag == 1:
+                    #print(f"\t\t(이  수) {df_all_list[i][2]}")
+                    a={"isClear":"(이  수)", "name":df_all_list[i][2]}
                 else:
-                    #print(f"\t\t(미이수) {lec[2]} {lec[3]}")
-                    lec_info["isClear"]="(미이수)"
-                lec_info["lecture_name"] = lec[2]
-                lec_info["grade"] = lec[3]
-            
-            lec_list.append(lec_info)
+                    #print(f"\t\t(미이수) {df_all_list[i][2]}")
+                    a={"isClear":"(미이수)", "name":df_all_list[i][2]}
+                lec_info.append(a)
         
-        return lec_list
+        return lec_info
 
 class LecField:
     def __init__(self):

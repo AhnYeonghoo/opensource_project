@@ -27,11 +27,9 @@ def upload_file(request):
     '''
     
     if request.method == "POST":
-        title = request.POST.get('title')
         uploaded_file = request.FILES['uploaded_file']
         
         document = models.Document(
-            title = title,
             uploaded_file = uploaded_file
         )
         document.save()
@@ -103,28 +101,33 @@ def contact(request):
     return render(request, "contact.html")
 
 def calculator(request):
-    my_info = load_data.MyInfo()
-    element = []
-    major = []
-    selection = []
-    for field, my_score in my_info.my_ge.field.items():
-        a = {"field":field, "my_score":my_score, "min_score":my_info.min_ge.field[field], "sub_field":[]}
-        if my_info.is_specific(field):
-            for sub_field, m_score in my_info.my_ge.sub_field[field].items():
-                b = {"sub_field":sub_field,"my_score":m_score, "min_score":my_info.min_ge.sub_field[field][sub_field], "lec_info":[]}
+    year = request.POST.get("year")
+    file_name = request.POST.get("file_name")
+    
+    print(year)
+    print(file_name)
+    c = load_data.MyInfo(int(year), file_name)
+    l = []
+    r = []
+    
+    
+    for field, my_score in c.my_ge.field.items():
+        a = {"field":field, "my_score":my_score, "min_score":c.min_ge.field[field], "sub_field":[]}
+        if c.is_specific(field):
+            for sub_field, m_score in c.my_ge.sub_field[field].items():
+                b = {"sub_field":sub_field,"my_score":m_score, "min_score":c.min_ge.sub_field[field][sub_field], "lec_info":[]}
                 if m_score < b["min_score"]:
-                    b["lec_info"]=my_info.print_ge(sub_field)
+                    b["lec_info"]=c.print_ge(sub_field)
                 a["sub_field"].append(b)
         elif field == "전공필수":
-            major=my_info.print_need_lec()
+            r=c.print_need_lec()
         elif field == "전공선택":
-            selection = my_info.print_ge("전공선택")
-        element.append(a)
+            c.print_major_selection()
+        l.append(a)
     
     context = {
-        "sd":element,
-        "major":major,
-        "selection":selection,
+        "sd":l,
+        "major":r,
     }
     #c.print_my_lec()
     return render(request, "calculator.html", context)
@@ -143,12 +146,18 @@ def read_user_lecture(request):
     
     return (request, "result-user-lecture.html", context)
         
-
 @login_required(login_url=URL_LOGIN)
 def get_my_lecture(request):
 
     return render(request, "upload-file.html")
 
-def get_my_lecture(request):
 
-    return render(request, "upload-file.html")
+# def get_year(request):
+#     year = request.POST.get("year")
+#     context = {"year": year}
+#     return redirect(request, "upload-file", context)
+
+# def get_filename(request):
+#     filename = request.POST.get("file_name")
+#     context = {"filename" : filename}
+#     return redirect(request, "upload-file", context)
