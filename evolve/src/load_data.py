@@ -145,10 +145,17 @@ class MyInfo:
                 lec_info["isClear"] = "(이수)"
                 lec_info["lecture_name"]=all_lecture_code_df.loc[lec2, "과목명"]
                 lec_info["grade"] = all_lecture_code_df.loc[lec2, "학점"]
+                lec_list.append(lec_info)
             for lec in lecture_in_2022[lecture_in_2022["분야"]=="전공선택"].values.tolist():
+                lec_info = {"isClear":"", "lecture_name":"", "grade": "", "previous_lecture_name":""}
                 if lec in codes:
                     continue
-                print("\t(미이수)", lec[4], lec[5])
+                lec_info["isClear"] = "(미이수)"
+                lec_info["lecture_name"]=lec[4]
+                lec_info["grade"] = lec[5]
+                #print("\t(미이수)", lec[4], lec[5])
+                lec_list.append(lec_info)
+            return lec_list
         else:
             my_learned_code=self.my_lecture["과목코드"].tolist()
             df_all_list = pd.DataFrame(lecture_in_2022, columns \
