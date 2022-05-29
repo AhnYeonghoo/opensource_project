@@ -18,7 +18,12 @@
     {% endif %}
     {% if sco.field == "전공선택"%}
         {% for lec in selection%}
-            <p>{{lec.isClear}} {{lec.lecture_name}} {{lec.grade}}</p>
+            <p>{{lec.isClear}} 
+                {% if lec.previous_lecture_name != ""%}
+                    {{lec.previous_lecture_name}} -> 
+                {% endif %}
+                {{lec.lecture_name}} {{lec.grade}}
+            </p>
         {% endfor %}
 
     {% endif %}

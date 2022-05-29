@@ -107,7 +107,7 @@ def calculator(request):
     year = request.POST.get("year")
     file_name = request.POST.get("file_name")
 
-    my_info = load_data.MyInfo()
+    my_info = load_data.MyInfo(int(year), file_name)
     element = []
     major = []
     selection = []
@@ -122,7 +122,7 @@ def calculator(request):
         elif field == "전공필수":
             major=my_info.print_need_lec()
         elif field == "전공선택":
-            selection = my_info.print_ge("전공선택")
+            selection = my_info.print_major_selection()
         element.append(a)
     
     context = {
