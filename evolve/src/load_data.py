@@ -87,7 +87,8 @@ class MyInfo:
         require_major_codes = self.min_ge.essential_code["전공필수"]
         my_major = self.my_lecture[self.my_lecture["영역"].isin(["전공"])]
         for lec_code in require_major_codes:
-            lec_info = {"isClear":"","name":"","changed":"","prerequire":"","score":""}
+            lec_info = {"isClear":"","name":"","changed":"","prerequire":"","score":"", "new_name":""}
+            lec_info["isClear"]="(미이수)"
             flag = False
             idx = all_lecture['과목코드'].tolist().index(lec_code)
             #print(end="\t")
@@ -100,18 +101,21 @@ class MyInfo:
             for onn_lec in all_ON_lecture:
                 if flag is False:
                     if lec_code == onn_lec[0]:
+                        lec_info["new_name"]=onn_lec[3]
                         if onn_lec[4] == "동일":
                             #print("->", onn_lec[3], "(변경)",end="")
                             lec_info["changed"]="(변경)"
                         elif onn_lec[4] == "삭제":
                             #print("(폐강)",end="")
                             lec_info["changed"]="(삭제)"
+                        elif onn_lec[4] == "신설":
+                            lec_info["changed"]="(신설)"
             
             
             if lec_code in prerequisites and self.year < 2020:
                 idx2 = all_lecture['과목코드'].tolist().index(prerequisites[lec_code])
                 #print("   ", all_lecture['과목명'].iloc[idx2]," (필요)",end="")
-                lec_info["prerequire"]=all_lecture['과목명'].iloc[idx2] + "(필요)"
+                lec_info["prerequire"]=all_lecture['과목명'].iloc[idx2]
 
             #print(all_lecture['학점'].iloc[idx],end="")
             #print()
@@ -142,7 +146,7 @@ class MyInfo:
                     #     all_lecture_code_df.loc[lec2, "과목명"], all_lecture_code_df.loc[lec2, "학점"])
                 # else:
                 #     print("\t(이수)", all_lecture_code_df.loc[lec1, "과목명"], all_lecture_code_df.loc[lec2, "학점"])
-                lec_info["isClear"] = "(이수)"
+                lec_info["isClear"] = "(이  수)"
                 lec_info["lecture_name"]=all_lecture_code_df.loc[lec2, "과목명"]
                 lec_info["grade"] = all_lecture_code_df.loc[lec2, "학점"]
                 lec_list.append(lec_info)
