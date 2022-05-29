@@ -1,58 +1,88 @@
 {% extends "base.html" %}
 {% block content %}
-<h1 style="color:blue">전공 및 교양 현황</h1>
-<br>
 
+<div class="container">
 
-{% for sco in sd %}
-    
-    <h2>{{sco.field}} ({{sco.my_score}} / {{sco.min_score}})</h2>
-    
-    {% for sub in sco.sub_field%}
-        <ul>
-            <h3> {{sub.sub_field}} ({{sub.my_score}} / {{sub.min_score}})</h3>
-            <ul>
-            {% for lec in sub.lec_info%}
-                <p>{{lec.isClear}}{{lec.lecture_name}}{{lec.grade}}</p>
-            {% endfor%}
-            </ul>
-        </ul>
-    {% endfor %}
-    {% if sco.field == "전공필수" %}
-        <ul>
-        {% for lec2 in major%}
-            <p>
-                {{lec2.isClear}}
-                {% if lec2.changed == "(신설)"%}
-                    {{lec2.new_name}}
-                {% elif lec2.changed == "(삭제)" %}
-                    {{lec2.name}}
-                    {{lec2.changed}}
-                {% elif lec2.changed == "(변경)" %}
-                    {{lec2.name}}
-                    ->
-                    {{lec2.new_name}}{{lec2.changed}}
-                {% else %}
-                    {{lec2.name}}
-                {% endif %}
-                {{lec2.prerequire}}{{lec2.score}}</p>
+    <div class="row row-offcanvas row-offcanvas-right">
+
+        <div class="col-xs-12 col-sm-12">
+        {% for sco in sd %}
+            
+            {% if sco.field == "전공필수" %}
+                
+                <div class="row">
+                    <div class="col-xs-6 col-lg-6">
+                        <center>
+                        <h1>{{sco.field}} ({{sco.my_score}} / {{sco.min_score}})</h1>
+                        </center>
+                        <ul>
+                            {% for lec2 in major%}
+                                <p>
+                                    {{lec2.isClear}}
+                                    {% if lec2.changed == "(신설)"%}
+                                        {{lec2.new_name}}
+                                    {% elif lec2.changed == "(삭제)" %}
+                                        {{lec2.name}}
+                                        {{lec2.changed}}
+                                    {% elif lec2.changed == "(변경)" %}
+                                        {{lec2.name}}
+                                        ->
+                                        {{lec2.new_name}}{{lec2.changed}}
+                                    {% else %}
+                                        {{lec2.name}}
+                                    {% endif %}
+                                    {{lec2.prerequire}}{{lec2.score}}
+                                </p>
+                            {% endfor %}
+                        </ul>
+                    </div><!--/.col-xs-6.col-lg-4-->
+                
+            {% elif sco.field == "전공선택" %}
+                    <div class="col-xs-6 col-lg-6">
+                    <center>
+                    <h1>{{sco.field}} ({{sco.my_score}} / {{sco.min_score}})</h1>
+                    </center>
+                        <ul>
+                            {% for lec in selection%}
+                                <p>{{lec.isClear}} 
+                                    {% if lec.previous_lecture_name != ""%}
+                                        {{lec.previous_lecture_name}} -> 
+                                    {% endif %}
+                                    {{lec.lecture_name}} {{lec.grade}}
+                                </p>
+                            {% endfor %}
+                        </ul>
+                    </div><!--/.col-xs-6.col-lg-4-->
+                </div>
+            {% else %}
+                <div class="row">
+                    <center>
+                    <h1>{{sco.field}} ({{sco.my_score}} / {{sco.min_score}})</h1>
+                    </center>
+                {% for sub in sco.sub_field%}
+                    {% if sco.field == "개신기초교양" or sco.field == "확대교양"%}
+                        <div class="col-xs-6 col-lg-6">
+                    {% elif sco.field == "일반교양" %}
+                        <div class="col-xs-6 col-lg-4">
+                    {% else %}
+                        <div class="col-xs-6 col-lg-12">
+                    {% endif %}
+                            <center>
+                            <h3>> {{sub.sub_field}} ({{sub.my_score}} / {{sub.min_score}})</h3>
+                            </center>
+                            <ul>
+                                {% for lec in sub.lec_info%}
+                                    <p>{{lec.isClear}}{{lec.lecture_name}}{{lec.grade}}</p>
+                                {% endfor%}
+                            </ul>
+                        </div><!--/.col-xs-6.col-lg-4, 6, 12-->
+                {% endfor %}
+                </div><!-- row -->
+            {% endif %}
+            <br>
         {% endfor %}
-        </ul>
-    {% endif %}
-    {% if sco.field == "전공선택"%}
-        <ul>
-        {% for lec in selection%}
-            <p>{{lec.isClear}} 
-                {% if lec.previous_lecture_name != ""%}
-                    {{lec.previous_lecture_name}} -> 
-                {% endif %}
-                {{lec.lecture_name}} {{lec.grade}}
-            </p>
-        {% endfor %}
-        </ul>
-    {% endif %}
-    
-{% endfor %}
-
+        </div><!-- col-xs-12 col-sm-12-->
+    </div><!--row row-offcanvas row-offcanvas-right-->
+</div><!--container-->
 </form>
 {% endblock %}
