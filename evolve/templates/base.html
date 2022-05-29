@@ -31,9 +31,7 @@
     <script src="{% static 'slideshow.js' %}"></script>
     <title>{% block title %}PAB {% endblock title %}</title>
     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-    <style>
-        @import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
-    </style>
+    {% block head_content %} {% endblock head_content%}
 </head>
 
 
