@@ -3,15 +3,23 @@
 <h1 style="color:blue">전공 및 교양 현황</h1>
 <br>
 
+
 {% for sco in sd %}
+    
     <h2>{{sco.field}} ({{sco.my_score}} / {{sco.min_score}})</h2>
+    
     {% for sub in sco.sub_field%}
-        <h3> {{sub.sub_field}} ({{sub.my_score}} / {{sub.min_score}})</h3>
-        {% for lec in sub.lec_info%}
-            <p>{{lec.isClear}}{{lec.lecture_name}}{{lec.grade}}</p>
-        {% endfor%}
+        <ul>
+            <h3> {{sub.sub_field}} ({{sub.my_score}} / {{sub.min_score}})</h3>
+            <ul>
+            {% for lec in sub.lec_info%}
+                <p>{{lec.isClear}}{{lec.lecture_name}}{{lec.grade}}</p>
+            {% endfor%}
+            </ul>
+        </ul>
     {% endfor %}
     {% if sco.field == "전공필수" %}
+        <ul>
         {% for lec2 in major%}
             <p>
                 {{lec2.isClear}}
@@ -29,8 +37,10 @@
                 {% endif %}
                 {{lec2.prerequire}}{{lec2.score}}</p>
         {% endfor %}
+        </ul>
     {% endif %}
     {% if sco.field == "전공선택"%}
+        <ul>
         {% for lec in selection%}
             <p>{{lec.isClear}} 
                 {% if lec.previous_lecture_name != ""%}
@@ -39,7 +49,7 @@
                 {{lec.lecture_name}} {{lec.grade}}
             </p>
         {% endfor %}
-
+        </ul>
     {% endif %}
     
 {% endfor %}
