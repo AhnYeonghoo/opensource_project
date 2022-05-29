@@ -13,12 +13,31 @@
     {% endfor %}
     {% if sco.field == "전공필수" %}
         {% for lec2 in major%}
-            <p>{{lec2.isClear}}{{lec2.name}}{{lec2.changed}}{{lec2.prerequire}}{{lec2.score}}</p>
+            <p>
+                {{lec2.isClear}}
+                {% if lec2.changed == "(신설)"%}
+                    {{lec2.new_name}}
+                {% elif lec2.changed == "(삭제)" %}
+                    {{lec2.name}}
+                    {{lec2.changed}}
+                {% elif lec2.changed == "(변경)" %}
+                    {{lec2.name}}
+                    ->
+                    {{lec2.new_name}}{{lec2.changed}}
+                {% else %}
+                    {{lec2.name}}
+                {% endif %}
+                {{lec2.prerequire}}{{lec2.score}}</p>
         {% endfor %}
     {% endif %}
     {% if sco.field == "전공선택"%}
         {% for lec in selection%}
-            <p>{{lec.isClear}} {{lec.lecture_name}} {{lec.grade}}</p>
+            <p>{{lec.isClear}} 
+                {% if lec.previous_lecture_name != ""%}
+                    {{lec.previous_lecture_name}} -> 
+                {% endif %}
+                {{lec.lecture_name}} {{lec.grade}}
+            </p>
         {% endfor %}
 
     {% endif %}
