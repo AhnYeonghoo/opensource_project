@@ -137,14 +137,14 @@ class MyInfo:
             for lec1, lec2 in zip(codes, changed_codes):
                 lec_info = {"isClear":"", "lecture_name":"", "grade": "", "previous_lecture_name":""}
                 if lec1 != lec2:
+                    lec_info["previous_lecture_name"]=all_lecture_code_df.loc[lec1, "과목명"]
                     # print("\t(이수)", all_lecture_code_df.loc[lec1, "과목명"], "->", \
                     #     all_lecture_code_df.loc[lec2, "과목명"], all_lecture_code_df.loc[lec2, "학점"])
-                    lec_info["isClear"] = "(이수)"
-                    lec_info["previous_lecture_name"]=all_lecture_code_df.loc[lec1, "과목명"]
-                    lec_info["lecture_name"]=all_lecture_code_df.loc[lec2, "과목명"]
-                    lec_info["grade"] = all_lecture_code_df.loc[lec2, "학점"]
-                else:
-                    print("\t(이수)", all_lecture_code_df.loc[lec1, "과목명"], all_lecture_code_df.loc[lec2, "학점"])
+                # else:
+                #     print("\t(이수)", all_lecture_code_df.loc[lec1, "과목명"], all_lecture_code_df.loc[lec2, "학점"])
+                lec_info["isClear"] = "(이수)"
+                lec_info["lecture_name"]=all_lecture_code_df.loc[lec2, "과목명"]
+                lec_info["grade"] = all_lecture_code_df.loc[lec2, "학점"]
             for lec in lecture_in_2022[lecture_in_2022["분야"]=="전공선택"].values.tolist():
                 if lec in codes:
                     continue
