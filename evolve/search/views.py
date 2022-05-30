@@ -106,7 +106,7 @@ def calculator(request):
     """
     year = request.POST.get("year")
     file_name = request.POST.get("file_name")
-
+    
     my_info = load_data.MyInfo(int(year), file_name)
     element = []
     major = []
