@@ -2,8 +2,14 @@
 {% block content %}
 
 <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-
-<h1 style="color:blue", "font-family:Lobster"> 계산하고자 하는 학점이수목록 엑셀 파일을 업로드 해주세요. </h1>
+<figure class="text-end">
+    <blockquote class="blockquote">
+        <p>A well-known quote, contained in a blockquote element.</p>
+    </blockquote>
+    <figcaption class="blockquote-footer">
+        Someone famous in <cite title="Source Title">Source Title</cite>
+    </figcaption>
+</figure>
 <br>
 <form action="{% url 'search:upload_file' %}" method="POST" enctype="multipart/form-data">
     <input type="file" name="uploaded_file">
@@ -27,21 +33,7 @@
 
 <br>
 
-<div>
-    <br>
-    <form action="{% url 'search:read_user_lecture' %}" method="POST">
-        {% csrf_token %}
-        <input type="submit" name="read_user_lecture" value="읽어온 데이터">
-    </form>
-</div>
 
-<br>
-<br>
-
-<form action="{% url 'search:get_my_lecture' %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" name="my_lec" value="내 강의">
-</form>
 
 <br>
 <br>

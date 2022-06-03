@@ -2,36 +2,41 @@
 {% block content %}
 {% load static %}
 <!DOCTYPE html>
-<html lang="Ko">
+
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="{% static 'index.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 
 </head>
 
 <body>
+
     <!--헤더 부분 끝
         -->
-    <div id="slideShow">
+    <div id="Slideshow">
         <div id="slides">
-            <img src="{% static 'main1.jpg'%}" alt="" style=" object-fit:fill;">
-            <img src="{% static 'main2.jpg'%}" alt="" style="object-fit:fill;">
-            <img src="{% static 'main3.png'%}" alt="" style=" object-fit:fill;">
-            <img src="{% static 'main4.jpg'%}" alt="" style=" object-fit:fill;">
+            <img src="{% static 'main1.jpg'%}" alt="">
+            <img src="{% static 'main2.jpg'%}" alt="">
+            <img src="{% static 'main3.png'%}">
+            <img src="{% static 'main4.jpg'%}">
         </div>
     </div>
+
+
     <!--본문 끝-->
     <footer>
         <!--푸터-->
         <div id="company">
-            <p>충청북도 청주시 서원구 충대로 1 E8-1 공학관 (대표전화)010-3568-3462</p>
+            <p>충청북도 청주시 서원구 충대로 1 E8-1 공학관<br>
+                dksdudgn00@chungbuk.ac.kr</p>
         </div>
     </footer>
+
     <script src="{% static 'slideshow.js' %}"></script>
 </body>
 
-</html>
+
 {% endblock %}
