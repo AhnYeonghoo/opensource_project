@@ -3,6 +3,7 @@
   margin: 0;
   box-sizing: border-box;
   padding: 0; /* 박스 영역은 테두리까지*/
+  background: #dfe6e9;
 }
 a {
   text-decoration: none;
