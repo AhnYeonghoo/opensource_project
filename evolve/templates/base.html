@@ -1,25 +1,7 @@
-<!DOCTYPE html>
 {% load static %}
 
-    {% comment %} <body>
-        <div>
-            <h1><a href="/">PAB</a></h1>
-            <h1><a font-size:30px>
-            <h1><a>
-        </div>
-
-        {% for post in posts %}
-            <div>
-                <p>published: {{ post.published_date }}</p>
-                <h1><a href="">{{ post.title }}</a></h1>
-                <p>{{ post.text|linebreaksbr }}</p>
-            </div>
-        {% endfor %}
-    </body> {% endcomment %}
 
 
-
-<html lang="kr">
 
 <head>
     <meta charset="UTF-8">
@@ -27,57 +9,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %} ">
+    <link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">
     <script src="{% static 'index.js' %}"></script>
     <script src="{% static 'slideshow.js' %}"></script>
+    <style>
+        body {
+            background: #dfe6e9;
+        }
+    </style>
     <title>{% block title %}PAB {% endblock title %}</title>
     {% block head_content %} {% endblock head_content%}
+
 </head>
 
 
-<body>
-    
-    {% block header %}
-    <main>
-        <header class="p-3 bg-dark text-white">
-           
-                <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-                <a style="font-size:20px" href="{% url 'search:index' %}">PAB</a>
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    
-                        <li style="">
-                            {% if user.is_authenticated %}
-                            <a class="nav-link" href="{% url 'authenticated:logout' %}">{{ user.username }}(로그아웃)</a>
-                            {% else %}
-                            <a class="nav-link" href="{% url 'authenticated:login' %}">Login</a>
-                            {% endif %}
-                        </li>
-                        <li>
-                            {% if not user.is_authenticated %}
-                            <a class="nav-link" href="{% url 'authenticated:signup' %}">Signup</a>
-                            {% endif %}
-                        </li>
-                    </div>
-                    
-                    <li>
-                        <a href="{% url 'search:goto_upload_file' %}" class="nav-link px-2 text-white">학점계산기</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'search:goto_recomand' %}" class="nav-link px-2 text-white">과목추천</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'search:contact' %}" class="nav-link px-2 text-white">Contact</a>
-                    </li>
-                </ul>   
-           
-            
-        </header>
+
+<header class="p-3 bg-dark text-white" style="height: 70px;
+padding: rem;
+color: white;
+background: teal;
+font-weight: bold;
+display: flex;
+justify-content: space-between;
+align-items: center;">
+
+    <a id="logo" href="{% url 'search:index' %}" style="font-size:50px;">PAB</a>
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+    <nav class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+
+        <span style="">
+            {% if user.is_authenticated %}
+            <a class="nav-link" href="{% url 'authenticated:logout' %}">{{ user.username }}(로그아웃)</a>
+            {% else %}
+            <a class="nav-link" href="{% url 'authenticated:login' %}">Login</a>
+            {% endif %}
+        </span>
+        <span>
+            {% if not user.is_authenticated %}
+            <a class="nav-link" href="{% url 'authenticated:signup' %}">Signup</a>
+            {% endif %}
+        </span>
+
+        <span>
+            <a href="{% url 'search:goto_upload_file' %}" class="nav-link px-2 text-white">학점계산기</a>
+        </span>
+        <span>
+            <a href="{% url 'search:goto_recomand' %}" class="nav-link px-2 text-white">과목추천</a>
+        </span>
+        <a href="{% url 'search:contact' %}" class="nav-link px-2 text-white">Contact</a>
+        </span>
+    </nav>
+
+
+</header>
 
 
 
-    </main>
-    {% endblock %}
-    <!-- 기본 템플릿 안에 삽입될 내용 Start -->
-    {% block content %} {% endblock %}
-</body>
 
-</html>
+
+<!-- 기본 템플릿 안에 삽입될 내용 Start -->
+
+{% block content %} {% endblock %}

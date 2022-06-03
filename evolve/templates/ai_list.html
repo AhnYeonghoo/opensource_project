@@ -4,8 +4,20 @@
 
 {% for i in ai %}
 
-과목명: {{i.lecture_name}}
-<br>
+<table class="table table-sm table-dark" style="text-align:center;">
+    <thead>
+        <tr>
+
+            <th scope="col">과목명</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+
+            <td>{{i.lecture_name}}</td>
+        </tr>
+    </tbody>
+</table>
 {% endfor %}
 
 {% endblock %}

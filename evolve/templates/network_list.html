@@ -3,9 +3,20 @@
 <h1> 네트워크에 대한 추천 과목 목록은 다음과 같습니다</h1>
 
 {% for i in network %}
+<table class="table table-sm table-dark" style="text-align:center;">
+    <thead>
+        <tr>
 
-과목명: {{i.lecture_name}}
-<br>
+            <th scope="col">과목명</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+
+            <td>{{i.lecture_name}}</td>
+        </tr>
+    </tbody>
+</table>
 {% endfor %}
 
 {% endblock %}
