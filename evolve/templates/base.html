@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 {% load static %}
 
-    {% comment %} <body>
-        <div>
-            <h1><a href="/">PAB</a></h1>
-            <h1><a font-size:30px>
-            <h1><a>
-        </div>
+{% comment %}
 
-        {% for post in posts %}
-            <div>
-                <p>published: {{ post.published_date }}</p>
-                <h1><a href="">{{ post.title }}</a></h1>
-                <p>{{ post.text|linebreaksbr }}</p>
-            </div>
-        {% endfor %}
-    </body> {% endcomment %}
+<body>
+    <div>
+        <h1><a href="/">PAB</a></h1>
+        <h1><a font-size:30px>
+                <h1><a>
+    </div>
+
+    {% for post in posts %}
+    <div>
+        <p>published: {{ post.published_date }}</p>
+        <h1><a href="">{{ post.title }}</a></h1>
+        <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+    {% endfor %}
+</body> {% endcomment %}
 
 
 
@@ -35,41 +37,42 @@
 
 
 <body>
-    
+
     {% block header %}
     <main>
         <header class="p-3 bg-dark text-white">
-           
-                <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-                <a style="font-size:20px" href="{% url 'search:index' %}">PAB</a>
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    
-                        <li style="">
-                            {% if user.is_authenticated %}
-                            <a class="nav-link" href="{% url 'authenticated:logout' %}">{{ user.username }}(로그아웃)</a>
-                            {% else %}
-                            <a class="nav-link" href="{% url 'authenticated:login' %}">Login</a>
-                            {% endif %}
-                        </li>
-                        <li>
-                            {% if not user.is_authenticated %}
-                            <a class="nav-link" href="{% url 'authenticated:signup' %}">Signup</a>
-                            {% endif %}
-                        </li>
-                    </div>
-                    
-                    <li>
-                        <a href="{% url 'search:goto_upload_file' %}" class="nav-link px-2 text-white">학점계산기</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'search:goto_recomand' %}" class="nav-link px-2 text-white">과목추천</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'search:contact' %}" class="nav-link px-2 text-white">Contact</a>
-                    </li>
-                </ul>   
-           
-            
+
+            <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet"
+                type="text/css">
+            <a href="{% url 'search:index' %}">PAB</a>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+
+                <li style="">
+                    {% if user.is_authenticated %}
+                    <a class="nav-link" href="{% url 'authenticated:logout' %}">{{ user.username }}(로그아웃)</a>
+                    {% else %}
+                    <a class="nav-link" href="{% url 'authenticated:login' %}">Login</a>
+                    {% endif %}
+                </li>
+                <li>
+                    {% if not user.is_authenticated %}
+                    <a class="nav-link" href="{% url 'authenticated:signup' %}">Signup</a>
+                    {% endif %}
+                </li>
+                </div>
+
+                <li>
+                    <a href="{% url 'search:goto_upload_file' %}" class="nav-link px-2 text-white">학점계산기</a>
+                </li>
+                <li>
+                    <a href="{% url 'search:goto_recomand' %}" class="nav-link px-2 text-white">과목추천</a>
+                </li>
+                <li>
+                    <a href="{% url 'search:contact' %}" class="nav-link px-2 text-white">Contact</a>
+                </li>
+            </ul>
+
+
         </header>
 
 
