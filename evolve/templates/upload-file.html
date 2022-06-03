@@ -2,36 +2,47 @@
 {% block content %}
 
 <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-<figure class="text-end">
-    <blockquote class="blockquote">
-        <p>A well-known quote, contained in a blockquote element.</p>
-    </blockquote>
-    <figcaption class="blockquote-footer">
-        Someone famous in <cite title="Source Title">Source Title</cite>
-    </figcaption>
-</figure>
+
+
+<div style="margin-top: 30px;">
+    <p style="color:#badc58; font-size:35px;">계산하고자 하는 수강현황 파일을 업로드 해주세요(format: xlxs, csv)</p>
+</div>
+
+<hr>
 <br>
-<form action="{% url 'search:upload_file' %}" method="POST" enctype="multipart/form-data">
-    <input type="file" name="uploaded_file">
-    {% csrf_token %}
-    <input type="submit" value="Upload" onclick="upload_file()">
-</form>
+<div class="input-group mb-3" style="display: flex; justify-content: center;">
+    <form action="{% url 'search:upload_file' %}" method="POST" enctype="multipart/form-data">
+        <input type="file" name="uploaded_file" style=" background:#c7ecee;; color:#c7ecee;" value="file">
+        {% csrf_token %}
+        <input type="submit" value="Upload" onclick="upload_file()"
+            style="width:100px; height:50px; background:#686de0; color:#c7ecee;">
+    </form>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
+<div class="input-group mb-3" style="display: flex; justify-content: center;">
+    <form action="{% url 'search:calculator' %}" method="POST">
+        {% csrf_token %}
+        <select name="year" style="-webkit-appearance:none; -moz-appearance:none;
+        appearance:none;  ">
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+        </select>
+        <input type="text" name="file_name" class="form-control" aria-label="Text input with dropdown button"
+            placeholder="파일명을 입력하세용">
+        <input type="submit" name="calculator" class="form-control" aria-label="Text input with dropdown button"
+            value="파일 계산!">
+
+    </form>
+</div>
+
 <br>
 
-<form action="{% url 'search:calculator' %}" method="POST">
-    {% csrf_token %}
-    <select name="year">
-        <option value="2019">2019</option>
-        <option value="2020">2020</option>
-        <option value="2021">2021</option>
-        <option value="2022">2022</option>
-    </select>
-    <input type="text" name="file_name" placeholder="파일명을 입력하세용">
-    <input type="submit" name="calculator" value="파일 계산!">
 
-</form>
-
-<br>
 
 
 

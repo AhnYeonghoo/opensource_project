@@ -1,11 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap");
-
 * {
   margin: 0;
-  padding: 0;
-  box-sizing: content-box;
-  height: max-content;
-  width: max-content;
+  box-sizing: border-box;
+  padding: 0; /* 박스 영역은 테두리까지*/
 }
 a {
   text-decoration: none;
@@ -24,11 +21,7 @@ ul {
   float: right;
   margin-right: 5px;
 }
-
-#Slideshow > #slides > img {
-  width: 1200px;
-  float: right;
-}
+/* 헤더 영역 */
 header {
   width: 100%;
   height: 80px;
@@ -47,7 +40,7 @@ header {
 /* 네비게이션 영역(메뉴바)*/
 nav {
   float: right;
-  width: 750px;
+  width: 900px;
   height: 100px;
   padding-top: 40px;
   margin-left: 100px;
@@ -55,13 +48,20 @@ nav {
 #topMenu {
   height: 60px;
 }
-
+#topMenu > li {
+  float: left;
+  font-size: 20px;
+  margin-left: 10px;
+}
 #topMenu > li > a {
   display: block;
   color: black;
   font-weight: 600;
   text-shadow: 0 1px gray;
   padding: 10px 60px;
+}
+#topMenu > li > a > span {
+  font-size: 0.5em;
 }
 #topMenu > li > a:hover {
   color: #000;
@@ -70,11 +70,6 @@ nav {
 #topMenu > li {
   float: left;
   position: relative;
-}
-
-#topMenu > li:hover {
-  color: aqua;
-  text-shadow: 0 - 1px #07c;
 }
 #topMenu > li > ul {
   display: none;
@@ -103,21 +98,117 @@ nav {
 
 /*본문 시작*/
 /*이미지 슬라이드 쇼 영역*/
+#slideShow {
+  clear: both; /* 플로팅 해제*/
+  width: 100%;
+  height: 450px;
+  position: relative;
+  overflow: hidden; /*영역이 넘치면 감춤*/
+}
+#slides {
+  position: absolute;
+}
+#slides > img {
+  width: 100%;
+  float: left;
+}
 
+/* 콘텐츠 영역 */
+#contents {
+  width: 100%;
+  height: 300px;
+  margin-top: 5px;
+}
+/*탭 메뉴 영역 */
+#tabMenu {
+  float: left;
+  width: 600px;
+  height: 100%;
+  margin-top: 10px;
+}
+#tabMenu input[type="radio"] {
+  display: none;
+}
+#tabMenu label {
+  display: inline-block;
+  margin: 0 0;
+  padding: 15px 25px;
+  font-weight: 600;
+  text-align: center;
+  color: #aaa;
+  border: 1px solid transparent;
+}
+#tabMenu label:hover {
+  color: #222;
+  cursor: pointer;
+}
+#tabMenu input:checked + label {
+  color: #b00;
+  border: 1px solid #ddd;
+  background-color: #eee;
+}
+.tabContent {
+  display: none;
+  padding: 20px 0 0;
+  border-top: 1px solid #ddd;
+}
+.tabContent h2 {
+  display: none;
+}
+#notice ul {
+  list-style: disc;
+  margin-left: 30px;
+}
+#notice ul li {
+  font-size: 16px;
+  line-height: 2.5;
+}
+#faq ul li {
+  font-size: 16px;
+  line-height: 2.5;
+}
+
+#tab1:checked ~ #notice,
+#tab2:checked ~ #faq {
+  display: block;
+}
+
+/*퀵 링크 영역*/
+#links {
+  float: right;
+  width: 600px;
+  height: 100%;
+  margin-top: 15px;
+}
+#links ul {
+  padding: 0;
+  overflow: hidden;
+}
+#links ul li {
+  float: left;
+  width: 33%;
+  text-align: center;
+  margin: 10px 0;
+}
+#links ul li a span {
+  display: block;
+  margin: 0 auto;
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  border: 1px solid #ddd;
+  line-height: 150px;
+}
+
+#links ul li a p {
+  margin-top: 15px;
+  font-weight: 600;
+  color: #666;
+}
+/* 하단 푸터 부분*/
 footer {
   width: 100%;
-  height: 200px;
+  height: 100px;
   border-top: 2px solid #222;
   background-color: azure;
-  margin-bottom: 5px;
-}
-
-#company {
-  clear: left;
-  margin-bottom: 25px;
-  margin-left: 20px;
-}
-p {
-  font-size: 14px;
-  color: #aaa;
 }
