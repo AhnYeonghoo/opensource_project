@@ -30,6 +30,8 @@
 
 ```terminal
 pip install Django
+pip install pandas
+pip install openpyxl
 python manage.py runserver
 ```
 
