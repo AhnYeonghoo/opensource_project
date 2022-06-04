@@ -3,7 +3,6 @@
   margin: 0;
   box-sizing: border-box;
   padding: 0; /* 박스 영역은 테두리까지*/
-  background: #dfe6e9;
 }
 a {
   text-decoration: none;
@@ -34,8 +33,6 @@ header {
   float: left;
   width: 100px;
   height: auto;
-  margin-right: 20px;
-  margin-top: 25px;
 }
 
 /* 네비게이션 영역(메뉴바)*/
