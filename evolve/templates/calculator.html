@@ -31,12 +31,12 @@ details[open] > summary ~ * { animation:reveal 0.5s;}
                     <div class="col-xs-6 col-lg-6">
                         <details>
                         
-                        <summary><center><h2>{{sco.field}} ({{sco.my_score}} / {{sco.min_score}})</h2></center></summary>
+                        <summary><center><h2 style="background:#444">{{sco.field}} ({{sco.my_score}} / {{sco.min_score}})</h2></center></summary>
                         
                         <div class="tpt">
-                        <ul>
+                        <ul style="background:#444">
                             {% for lec2 in major%}
-                                <p>
+                                <p style="background:#444">
                                     {{lec2.isClear}}
                                     {% if lec2.changed == "(신설)"%}
                                         {{lec2.new_name}}
@@ -63,13 +63,13 @@ details[open] > summary ~ * { animation:reveal 0.5s;}
                     <details>
                     <summary>
                         <center>
-                        <h2>{{sco.field}} ({{sco.my_score}} / {{sco.min_score}})</h2>
+                        <h2 style="background:#444">{{sco.field}} ({{sco.my_score}} / {{sco.min_score}})</h2>
                         </center>
                     </summary>
                         <div class="tpt">
-                        <ul>
+                        <ul style="background:#444">
                             {% for lec in selection%}
-                                <p>{{lec.isClear}} 
+                                <p style="background:#444">{{lec.isClear}} 
                                     {% if lec.previous_lecture_name != ""%}
                                         {{lec.previous_lecture_name}} -> 
                                     {% endif %}
@@ -85,7 +85,7 @@ details[open] > summary ~ * { animation:reveal 0.5s;}
                 <div class="row">
                 <div class="tpt">
                 <center>
-                <h2>{{sco.field}} ({{sco.my_score}} / {{sco.min_score}})</h2>
+                <h2 style="background:#444">{{sco.field}} ({{sco.my_score}} / {{sco.min_score}})</h2>
                 </center>
                 </div>
                     
@@ -100,13 +100,13 @@ details[open] > summary ~ * { animation:reveal 0.5s;}
                             <details>
                             <summary>
                                 <center>
-                                <h3>> {{sub.sub_field}} ({{sub.my_score}} / {{sub.min_score}})</h3>
+                                <h3 style="background:#444"> {{sub.sub_field}} ({{sub.my_score}} / {{sub.min_score}})</h3>
                                 </center>
                             </summary>
                             <div class="tpt">
-                            <ul>
+                            <ul style="background:#444">
                                 {% for lec in sub.lec_info%}
-                                    <p>{{lec.isClear}}{{lec.lecture_name}}{{lec.grade}}</p>
+                                    <p style="background:#444">{{lec.isClear}}{{lec.lecture_name}}{{lec.grade}}</p>
                                 {% endfor%}
                             </ul>
                             </div>
