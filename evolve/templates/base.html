@@ -13,7 +13,7 @@
     <script src="{% static 'index.js' %}"></script>
     <script src="{% static 'slideshow.js' %}"></script>
     <style>
-        body {
+        * {
             background: #dfe6e9;
         }
     </style>
@@ -70,4 +70,6 @@ align-items: center;">
 
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->
 
-{% block content %} {% endblock %}
+<body>
+    {% block content %} {% endblock %}
+</body>
