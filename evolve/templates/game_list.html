@@ -1,23 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
+<center>
 <h1> 게임에 대한 추천 과목 목록은 다음과 같습니다</h1>
-
-{% for i in game %}
-
+<div class="col-xs-12 col-sm-12">
+    <div class="col-xs-6 col-lg-6">
 <table class="table table-sm table-dark" style="text-align:center;">
     <thead>
         <tr>
-
+            
             <th scope="col">과목명</th>
         </tr>
     </thead>
     <tbody>
+        {% for i in game %}
         <tr>
-
             <td>{{i.lecture_name}}</td>
         </tr>
+        {% endfor %}
     </tbody>
 </table>
-{% endfor %}
+</div>
+</div>
+</center>
 
 {% endblock %}
