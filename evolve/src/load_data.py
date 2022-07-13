@@ -19,6 +19,7 @@ def get_my_lecture(file_name="learned.xlsx", type="all"):
     return = dataframe
     """
     file_name = "./media/result/" + file_name
+    print(file_name)
     if(os.path.isfile(file_name) == False):
         return []
     else:
@@ -60,9 +61,9 @@ class MyInfo:
         :return: void
 
         """
-        self.my_ge.field[field] += int(score)
+        self.my_ge.field[field] += int(float(score))
         if sub_field != '':
-            self.my_ge.sub_field[field][sub_field] += int(score)
+            self.my_ge.sub_field[field][sub_field] += int(float(score))
 
     def get_course_info(self, i):
         field = self.my_lecture.iat[i,1]
